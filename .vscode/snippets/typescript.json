@@ -1,0 +1,12 @@
+{
+  "AVATest": {
+    "body": ["test(`$1`, $ => {", "  $2", "});$3"],
+    "description": "Generate async test case",
+    "prefix": "atest"
+  },
+  "ConsoleLog": {
+    "body": ["console.log(`$1: ${JSON.stringify($1)}`);$2"],
+    "description": "Serialize and print value",
+    "prefix": "clog"
+  }
+}

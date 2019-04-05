@@ -1,0 +1,19 @@
+- command: checkup
+  mimetype: numbers
+  destination: ~/Documents/Accounting/1\)\ Weekly\ Checkups/2019
+  duration: weekly
+  additionalUrls:
+        - https://www.myfitnesspal.com/food/diary
+        - https://home.personalcapital.com/page/login/app
+        - https://www.rescuetime.com/dashboard
+- command: accounting
+  mimetype: numbers
+  duration: monthly
+  destination: ~/Documents/Accounting/1\)\ Monthly\ Accounting\ Audits/2019
+  additionalUrls:
+        - https://home.personalcapital.com/page/login/app
+        - https://www.rescuetime.com/dashboard
+- command: goals
+  mimetype: pages
+  destination: ~/Documents/Accounting/1\)\ Trimesterly\ Planning\ Audits/2019
+  duration: trimesterly

@@ -1,0 +1,29 @@
+{
+  "[typescript]": {
+    "editor.wordWrapColumn": 95
+  },
+  "editor.formatOnSave": true,
+  "editor.tabCompletion": "onlySnippets",
+  "editor.tabSize": 2,
+  "files.autoSave": "onFocusChange",
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/.cache": true,
+    "**/.nyc_output": true,
+    "**/dist": true,
+    "**/node_modules": true
+  },
+  "files.insertFinalNewline": true,
+  "prettier.eslintIntegration": true,
+  "search.exclude": {
+    "**/.DS_Store": true,
+    "**/.cache": true,
+    "**/.nyc_output": true,
+    "**/dist": true,
+    "**/documentation": true,
+    "**/node_modules": true,
+    "**/yarn.lock": true
+  },
+  "eslint.packageManager": "yarn",
+  "eslint.run": "onSave"
+}

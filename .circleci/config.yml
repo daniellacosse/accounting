@@ -1,0 +1,93 @@
+version: 2.1
+
+executors:
+  node:
+    docker:
+      - image: circleci/node:latest
+
+commands:
+  set_git_user:
+    description: "setup circle CI as a git user"
+    steps:
+      - add_ssh_keys
+
+      - run: |
+          git config credential.helper 'cache --timeout=120'
+          git config user.name 'CircleCI'
+          git config user.email '<>'
+
+  get_node_modules:
+    description: "fetch all necessary node dependencies"
+    steps:
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+            - v1-dependencies-
+
+      - run: make node_modules
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+
+jobs:
+  build:
+    executor: node
+
+    steps:
+      - checkout
+      - get_node_modules
+
+      - run: make test
+
+  update_docs_and_patch:
+    executor: node
+
+    steps:
+      - checkout
+      - get_node_modules
+      - set_git_user
+
+      - run: |
+          make patch
+
+          if [[ $(git diff) ]]; then
+            git add -A
+            git commit --amend --no-edit
+          fi
+
+          git push origin staging --tags
+
+  # TODO:
+  release:
+    executor: node
+
+    steps:
+      - checkout
+      - run: make release
+
+workflows:
+  version: 2
+
+  build:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore:
+                - development
+  staging:
+    jobs:
+      - update_docs_and_patch:
+          filters:
+            branches:
+              only:
+                - staging
+                - development
+  # master:
+  #   jobs:
+  #     - release:
+  #         filters:
+  #           branches:
+  #             only: master

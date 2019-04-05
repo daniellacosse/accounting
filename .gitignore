@@ -1,0 +1,12 @@
+node_modules
+yarn-error.log
+
+# app-specific
+configuration/credentials.yml
+
+# parceljs
+.cache
+dist
+
+# code coverage
+.nyc_output

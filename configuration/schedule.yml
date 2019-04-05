@@ -1,0 +1,107 @@
+boardID: 5ae498ab94b06f3fcf3262fa
+templates:
+  - name: morning pills
+    startTime: "06:30"
+    listNames:
+      - Sunday
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+      - Saturday
+  - name: exercise
+    startTime: "07:00"
+    labelNames:
+      - health
+    listNames:
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+  - name: start work
+    startTime: "9:00"
+    listNames:
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+  - name: leave work
+    startTime: "17:00"
+    listNames:
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+  # - name: therapy
+  #   startTime: "10:15"
+  #   labelNames:
+  #     - health
+  #   listNames:
+  #     - Thursday
+  - name: weekly accounting
+    startTime: "11:00"
+    labelNames:
+      - accounting
+    listNames:
+      - Sunday
+    checklist:
+      - straighten up/spot clean
+      - put away groceries/dishes
+      - take out trash
+      - laundry
+      - weekly checkup
+      - audit (if any)
+      - sort files
+      - pill boxes
+      - pill shakes
+      - stew (if needed)
+  - name: weekly right
+    startTime: "20:00"
+    labelNames:
+      - right plan
+    listNames:
+      - Tuesday
+    checklist:
+      - typing practice
+      - code something
+  - name: weekly left
+    startTime: "20:00"
+    labelNames:
+      - left plan
+    listNames:
+      - Thursday
+    checklist:
+      - performance practice
+      - create something
+  - name: exercise
+    startTime: "13:00"
+    labelNames:
+      - health
+    listNames:
+      - Sunday
+  - name: exercise - aerobic
+    startTime: "14:00"
+    labelNames:
+      - health
+    listNames:
+      - Saturday
+  - name: exercise - yoga
+    startTime: "14:00"
+    labelNames:
+      - health
+    listNames:
+      - Sunday
+  - name: evening pills
+    startTime: "22:30"
+    listNames:
+      - Sunday
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+      - Saturday

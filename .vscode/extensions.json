@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "eamodio.gitlens",
+    "esbenp.prettier-vscode",
+    "joelday.docthis",
+    "dbaeumer.vscode-eslint",
+    "rebornix.project-snippets",
+    "wayou.vscode-todo-highlight",
+    "yzhang.markdown-all-in-one"
+  ]
+}

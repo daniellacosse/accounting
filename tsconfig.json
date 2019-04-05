@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "alwaysStrict": true,
+    "baseUrl": ".",
+    "experimentalDecorators": true,
+    "lib": ["esnext", "dom", "scripthost"],
+    "module": "commonjs",
+    "outDir": "dist",
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "rootDirs": ["."],
+    "sourceMap": true,
+    "types": ["node"]
+  },
+  // we exclude these files to save typescript from having to go through them
+  "exclude": [
+    "node_modules",
+    ".cache",
+    "dist",
+    ".vscode",
+    "config",
+    "documentation",
+    ".nyc_output",
+    ".circleci"
+  ]
+  // "typedocOptions": {
+  //   "exclude": "**/__tests__/*.ts",
+  //   "excludeExternals": true,
+  //   "excludePrivate": true,
+  //   "hideGenerator": true,
+  //   "includeDeclarations": true,
+  //   "mode": "file",
+  //   "name": "Accounting CLI",
+  //   "out": "documentation",
+  //   "readme": "none",
+  //   "theme": "markdown"
+  // }
+}

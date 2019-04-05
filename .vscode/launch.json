@@ -1,0 +1,38 @@
+{
+  "configurations": [
+    {
+      "args": ["trello:rollup"],
+      "cwd": "${workspaceFolder}",
+      "name": "Trello Rollup",
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+      "preLaunchTask": "npm: build",
+      "program": "${workspaceFolder}/cli.ts",
+      "request": "launch",
+      "sourceMaps": true,
+      "type": "node"
+    },
+    {
+      "args": ["trello:reset"],
+      "cwd": "${workspaceFolder}",
+      "name": "Trello Reset",
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+      "preLaunchTask": "npm: build",
+      "program": "${workspaceFolder}/cli.ts",
+      "request": "launch",
+      "sourceMaps": true,
+      "type": "node"
+    },
+    {
+      "args": ["file:checkup"],
+      "cwd": "${workspaceFolder}",
+      "name": "Weekly Checkup",
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+      "preLaunchTask": "npm: build",
+      "program": "${workspaceFolder}/cli.ts",
+      "request": "launch",
+      "sourceMaps": true,
+      "type": "node"
+    }
+  ],
+  "version": "0.2.0"
+}
