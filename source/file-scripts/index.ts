@@ -10,7 +10,7 @@ import templateFile from "./template-file";
  */
 export default async function fileScriptRunner(
   userCommand: string
-): Promise<any> {
+): Promise<string> {
   const template = templates.find(({ command }) => command === userCommand);
 
   if (!template) {

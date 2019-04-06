@@ -9,7 +9,10 @@ import moment from "moment"; // eslint-disable-line no-unused-vars
  * @param {string} dateTemplate how to format the date
  * @returns {string} The filename to be used.
  */
-export const weekly = (starting: moment.Moment, dateTemplate: string = "M-D") =>
+export const weekly = (
+  starting: moment.Moment,
+  dateTemplate: string = "M-D"
+): string =>
   `week-of-${starting.format(dateTemplate)}-to-${starting
     .add(1, "weeks")
     .subtract(1, "day")
@@ -27,4 +30,4 @@ export const weekly = (starting: moment.Moment, dateTemplate: string = "M-D") =>
 export const monthly = (
   starting: moment.Moment,
   dateTemplate: string = "MMMM"
-) => starting.format(dateTemplate);
+): string => starting.format(dateTemplate);

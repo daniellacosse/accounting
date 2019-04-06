@@ -2,10 +2,14 @@
 env:
   node: true
   es6: true
-extends: eslint:recommended
+extends: 
+  - plugin:@typescript-eslint/recommended
+  - prettier
+  - prettier/@typescript-eslint
 parser: "@typescript-eslint/parser"
 parserOptions:
   sourceType: module
+  project: ./tsconfig.json
 plugins:
   - "@typescript-eslint"
 rules:
@@ -21,3 +25,7 @@ rules:
       requireParamDescription: true
       requireParamType: true
       requireReturnType: true
+  indent: 0
+  "@typescript-eslint/indent": 
+    - error
+    - 2

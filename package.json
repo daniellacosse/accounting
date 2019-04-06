@@ -19,6 +19,8 @@
     "concurrently": "^4.1.0",
     "consola": "^2.5.6",
     "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.1.0",
+    "jsdoc-to-markdown": "^4.0.1",
     "lodash.find": "^4.6.0",
     "moment": "^2.22.1",
     "parcel-bundler": "^1.12.2",
@@ -44,7 +46,7 @@
     "lint": "make lint",
     "parcel": "./node_modules/parcel-bundler/bin/cli.js",
     "eslint": "./node_modules/eslint/bin/eslint.js",
-    "typedoc": "./node_modules/.bin/typedoc"
+    "jsdoc2md": "./node_modules/jsdoc-to-markdown/bin/cli.js"
   },
   "version": "0.0.2"
 }

@@ -5,6 +5,9 @@
   "editor.formatOnSave": true,
   "editor.tabCompletion": "onlySnippets",
   "editor.tabSize": 2,
+  "eslint.packageManager": "yarn",
+  "eslint.run": "onSave",
+  "eslint.validate": ["typescript"],
   "files.autoSave": "onFocusChange",
   "files.exclude": {
     "**/.DS_Store": true,
@@ -23,7 +26,5 @@
     "**/documentation": true,
     "**/node_modules": true,
     "**/yarn.lock": true
-  },
-  "eslint.packageManager": "yarn",
-  "eslint.run": "onSave"
+  }
 }

@@ -103,7 +103,7 @@ $(BUILD_FILES): _deps $(SOURCE_FILES) $(SOURCE_FOLDERS)
 	;'
 
 $(DOCS): _deps $(SOURCE_FILES) $(SOURCE_FOLDERS)
-	yarn typedoc
+	yarn -s jsdoc2md ./source/**/**/*.ts > ./documentation/readme.md
 
 # we store previous dependency installs in a temporary folder
 # to decide if we need to retrigger them

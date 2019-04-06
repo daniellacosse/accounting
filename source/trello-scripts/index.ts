@@ -13,11 +13,11 @@ import { occurredInTheLastWeek } from "./occurred-since";
  * @export default
  * @module trello
  * @param {string} command The command that this script runner will run.
- * @returns {Promise<any>} A promise containing the results
+ * @returns {Promise<string | Map<string, string>>} A promise containing the results
  */
 export default async function trelloScriptRunner(
   command: string
-): Promise<any> {
+): Promise<string | { [label: string]: string }> {
   const context: TrelloContext = {
     ...thisWeekConfig,
     trello: new Trello(creds.trello.key, creds.trello.token)

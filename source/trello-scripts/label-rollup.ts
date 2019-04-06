@@ -11,7 +11,7 @@ class TrelloRollup {
    * @type {number}
    * @memberof TrelloRollup
    */
-  completed: number;
+  private completed: number;
 
   /**
    * The total number of TrelloCards.
@@ -19,7 +19,7 @@ class TrelloRollup {
    * @type {number}
    * @memberof TrelloRollup
    */
-  total: number;
+  private total: number;
 
   /**
    *Creates an instance of TrelloRollup.
@@ -27,7 +27,7 @@ class TrelloRollup {
    * @param {number} [total=0] the total number of cards (defaults to zero)
    * @memberof TrelloRollup
    */
-  constructor(completed: number = 0, total: number = 0) {
+  public constructor(completed: number = 0, total: number = 0) {
     this.completed = completed;
     this.total = total;
   }
@@ -38,7 +38,7 @@ class TrelloRollup {
    * @returns {void} n/a
    * @memberof TrelloRollup
    */
-  addUncompletedCard(): void {
+  public addUncompletedCard(): void {
     this.total += 1;
   }
 
@@ -48,7 +48,7 @@ class TrelloRollup {
    * @returns {void} n/a
    * @memberof TrelloRollup
    */
-  addCompletedCard(): void {
+  public addCompletedCard(): void {
     this.total += 1;
     this.completed += 1;
   }
@@ -59,7 +59,7 @@ class TrelloRollup {
    * @returns {string} the formatted string
    * @memberof TrelloRollup
    */
-  toString(): string {
+  public toString(): string {
     return `${this.completed}/${this.total}`;
   }
 }
