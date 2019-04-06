@@ -24,17 +24,17 @@
     "documentation",
     ".nyc_output",
     ".circleci"
-  ]
-  // "typedocOptions": {
-  //   "exclude": "**/__tests__/*.ts",
-  //   "excludeExternals": true,
-  //   "excludePrivate": true,
-  //   "hideGenerator": true,
-  //   "includeDeclarations": true,
-  //   "mode": "file",
-  //   "name": "Accounting CLI",
-  //   "out": "documentation",
-  //   "readme": "none",
-  //   "theme": "markdown"
-  // }
+  ],
+  "typedocOptions": {
+    "exclude": "**/__tests__/*.ts",
+    "excludeExternals": true,
+    "excludePrivate": true,
+    "hideGenerator": true,
+    "includeDeclarations": true,
+    "mode": "file",
+    "name": "Accounting CLI",
+    "out": "documentation",
+    "readme": "none",
+    "theme": "markdown"
+  }
 }
