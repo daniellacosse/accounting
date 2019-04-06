@@ -57,15 +57,15 @@ jobs:
             git commit --amend --no-edit
           fi
 
-          git push origin staging --tags
+          git push origin master --tags
 
   # TODO:
-  release:
-    executor: node
+  # release:
+  #   executor: node
 
-    steps:
-      - checkout
-      - run: make release
+  #   steps:
+  #     - checkout
+  #     - run: make release
 
 workflows:
   version: 2
@@ -83,7 +83,7 @@ workflows:
           filters:
             branches:
               only:
-                - staging
+                # - staging
                 - development
   # master:
   #   jobs:
