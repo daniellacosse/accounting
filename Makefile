@@ -96,7 +96,7 @@ clear-all: clear-deps clear-build clear-docs
 
 # -- files --
 $(CREDS): $(CRED_TEMPLATE)
-	cp $(CRED_TEMPLATE) $(CREDS) ;\
+	cp -f $(CRED_TEMPLATE) $(CREDS) ;\
 	if [ '${NO_DEPS}' != 'true' ]; then code $(CREDS); fi
 
 $(CRED_TEMPLATE): # manually edited
