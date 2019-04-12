@@ -24,7 +24,7 @@ commands:
             - v1-dependencies-{{ checksum "yarn.lock" }}
             - v1-dependencies-
 
-      - run: make .cache/deps/last_yarn
+      - run: make yarn.lock
 
       - save_cache:
           paths:
@@ -84,7 +84,7 @@ workflows:
                 - master
       - update_docs_and_patch_master:
           requires:
-            - build
+            - test
           filters:
             branches:
               only: development
