@@ -13,6 +13,9 @@ CRED_TEMPLATE=configuration/credentials.example.yml
 DEP_FOLDER=.cache/deps
 DEP_FILES=Brewfile yarn.lock .vscode/extensions.json
 
+# environment
+ENV=$($$ENV)
+
 # source code
 SOURCE=source
 # ---
@@ -55,7 +58,7 @@ start: $(CLI_BUILD) $(CREDS)
 	node $(CLI_BUILD) ${CMD}
 
 code: $(DEP_FILES)
-	code $(SOURCE)
+	code .
 
 lint: $(GIT)
 	changes=$$(git diff --name-only --staged | egrep '\.ts') ;\
@@ -97,7 +100,7 @@ clear-all: clear-deps clear-build clear-docs
 # -- files --
 $(CREDS): $(CRED_TEMPLATE)
 	cp -f $(CRED_TEMPLATE) $(CREDS) ;\
-	if [ '${NO_DEPS}' != 'true' ]; then code $(CREDS); fi
+	if [ "$(ENV)" != "production" ]; then code $(CREDS); fi
 
 $(CRED_TEMPLATE): # manually edited
 
@@ -124,21 +127,21 @@ $(DEP_FOLDER):
 Brewfile: $(BREW) $(DEP_FOLDER) $(DEP_FOLDER)/last_brew
 
 $(DEP_FOLDER)/last_brew:
-	if [ '${NO_DEPS}' == 'true' ]; then exit 0; fi ;\
+	if [ "$(ENV)" != "production" ]; then exit 0; fi ;\
 	brew bundle \
 		> $(DEP_FOLDER)/last_brew 2>&1
 
 yarn.lock: $(DEP_FOLDER) $(DEP_FOLDER)/last_yarn
 
 $(DEP_FOLDER)/last_yarn:
-	if [ '${NO_DEPS}' == 'true' ]; then exit 0; fi ;\
+	if [ "$(ENV)" != "production" ]; then exit 0; fi ;\
 	yarn install \
 		> $(DEP_FOLDER)/last_yarn 2>&1
 
 .vscode/extensions.json: $(DEP_FOLDER) $(DEP_FOLDER)/last_code
 
 $(DEP_FOLDER)/last_code:
-	if [ '${NO_DEPS}' == 'true' ]; then exit 0; fi ;\
+	if [ "$(ENV)" != "production" ]; then exit 0; fi ;\
 	cat .vscode/extensions.json |\
 	jq -r '.recommendations | .[]' |\
 	xargs -L 1 code --install-extension \
