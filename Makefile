@@ -127,21 +127,21 @@ $(DEP_FOLDER):
 Brewfile: $(BREW) $(DEP_FOLDER) $(DEP_FOLDER)/last_brew
 
 $(DEP_FOLDER)/last_brew:
-	if [ "$(ENV)" != "production" ]; then exit 0; fi ;\
+	if [ "$(ENV)" == "production" ]; then exit 0; fi ;\
 	brew bundle \
 		> $(DEP_FOLDER)/last_brew 2>&1
 
 yarn.lock: $(DEP_FOLDER) $(DEP_FOLDER)/last_yarn
 
 $(DEP_FOLDER)/last_yarn:
-	if [ "$(ENV)" != "production" ]; then exit 0; fi ;\
+	if [ "$(ENV)" == "production" ]; then exit 0; fi ;\
 	yarn install \
 		> $(DEP_FOLDER)/last_yarn 2>&1
 
 .vscode/extensions.json: $(DEP_FOLDER) $(DEP_FOLDER)/last_code
 
 $(DEP_FOLDER)/last_code:
-	if [ "$(ENV)" != "production" ]; then exit 0; fi ;\
+	if [ "$(ENV)" == "production" ]; then exit 0; fi ;\
 	cat .vscode/extensions.json |\
 	jq -r '.recommendations | .[]' |\
 	xargs -L 1 code --install-extension \
