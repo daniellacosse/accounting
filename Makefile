@@ -96,7 +96,7 @@ clear-all: clear-deps clear-build clear-docs
 
 # -- files --
 $(CREDS): $(CRED_TEMPLATE_PATH)
-	if [[ ${NO_DEPS} ]]; then exit 0; fi ;\
+	if [[ ${NO_DEPS} ]]; then cp $(CRED_TEMPLATE) $(CREDS); exit 0; fi ;\
 	cp $(CRED_TEMPLATE) $(CREDS) && code $(CREDS)
 
 $(CLI_BUILD): $(DEP_FILES) $(SOURCE_FOLDERS_AND_FILES)
