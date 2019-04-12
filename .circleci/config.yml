@@ -60,6 +60,8 @@ jobs:
       - set_git_user
 
       - run: |
+          set -e
+
           # merge development into master
           git fetch
           git checkout master
