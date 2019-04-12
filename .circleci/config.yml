@@ -16,15 +16,24 @@ commands:
           git config user.name 'CircleCI'
           git config user.email '<>'
 
+  set_production_environment:
+    description: "sets the current environment to production"
+    steps:
+      - run: |
+          echo "export ENV=production" >> $BASH_ENV
+          source $BASH_ENV
+
   get_node_modules:
     description: "fetch all necessary node dependencies"
     steps:
+      - set_production_environment
+
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "yarn.lock" }}
             - v1-dependencies-
 
-      - run: make NO_DEPS=false yarn.lock
+      - run: make -e yarn.lock
 
       - save_cache:
           paths:
@@ -40,7 +49,16 @@ jobs:
       - checkout
       - get_node_modules
 
-      - run: make NO_DEPS=true
+      - run: make -e
+  
+  lint:
+    executor: node
+    
+    steps:
+      - checkout
+      - get_node_modules
+      
+      - run: make -e lint
 
   test:
     executor: node
@@ -49,7 +67,7 @@ jobs:
       - checkout
       - get_node_modules
 
-      - run: make NO_DEPS=true test
+      - run: make -e test
 
   update_docs_and_patch_master:
     executor: node
@@ -79,6 +97,13 @@ workflows:
             branches:
               ignore:
                 - master
+      - lint:
+          requires:
+            - build
+          filters:
+            branches:
+              ignore:
+                - master
       - test:
           requires:
             - build
@@ -88,6 +113,7 @@ workflows:
                 - master
       - update_docs_and_patch_master:
           requires:
+            - lint
             - test
           filters:
             branches:
