@@ -24,7 +24,7 @@ commands:
             - v1-dependencies-{{ checksum "yarn.lock" }}
             - v1-dependencies-
 
-      - run: make yarn.lock
+      - run: make NO_DEPS=false yarn.lock
 
       - save_cache:
           paths:
@@ -40,7 +40,7 @@ jobs:
       - checkout
       - get_node_modules
 
-      - run: make NO_DEPS="true"
+      - run: make NO_DEPS=true
 
   test:
     executor: node
@@ -49,7 +49,7 @@ jobs:
       - checkout
       - get_node_modules
 
-      - run: make NO_DEPS="true" test
+      - run: make NO_DEPS=true test
 
   update_docs_and_patch_master:
     executor: node
@@ -68,7 +68,7 @@ jobs:
           git merge development
 
           # tag master with new version/docs and push
-          make NO_DEPS="true" patch
+          make NO_DEPS=true patch
           git push -u origin master --tags
 
 workflows:
