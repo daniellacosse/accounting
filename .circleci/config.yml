@@ -24,10 +24,11 @@ commands:
             - v1-dependencies-{{ checksum "yarn.lock" }}
             - v1-dependencies-
 
-      - run: make node_modules
+      - run: make .cache/deps/last_yarn
 
       - save_cache:
           paths:
+            - .cache/deps
             - node_modules
           key: v1-dependencies-{{ checksum "yarn.lock" }}
 
@@ -39,9 +40,18 @@ jobs:
       - checkout
       - get_node_modules
 
+      - run: make
+
+  test:
+    executor: node
+
+    steps:
+      - checkout
+      - get_node_modules
+
       - run: make test
 
-  update_docs_and_patch:
+  update_docs_and_patch_master:
     executor: node
 
     steps:
@@ -50,14 +60,14 @@ jobs:
       - set_git_user
 
       - run: |
+          # merge development into master
+          git fetch
+          git checkout master
+          git merge development
+
+          # tag master with new version/docs and push
           make patch
-
-          if [[ $(git diff) ]]; then
-            git add -A
-            git commit --amend --no-edit
-          fi
-
-          git push origin master --tags
+          git push -u origin master --tags
 
 workflows:
   build:
@@ -66,11 +76,15 @@ workflows:
           filters:
             branches:
               ignore:
-                - development
-  staging:
-    jobs:
-      - update_docs_and_patch:
+                - master
+      - test:
           filters:
             branches:
-              only:
-                - development
+              ignore:
+                - master
+      - update_docs_and_patch_master:
+          requires:
+            - build
+          filters:
+            branches:
+              only: development

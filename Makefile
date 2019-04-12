@@ -5,33 +5,38 @@ BREW:=$(which brew)
 
 BREW_URL=https://raw.githubusercontent.com/Homebrew/install/master/install
 
+# credentials
 CREDS=configuration/credentials.yml
 CRED_TEMPLATE=configuration/credentials.example.yml
 
+# dependencies
+DEP_FOLDER=.cache/deps
+DEP_FILES=Brewfile yarn.lock .vscode/extensions.json
+
+# source code
 SOURCE=source
 # ---
-SOURCE_FOLDERS=$(find $(SOURCE) -type d)
-SOURCE_FILES=$(find $(SOURCE) -type f -name '*')
+SOURCE_FOLDERS_AND_FILES=$(find $(SOURCE) -type d) $(find $(SOURCE) -type f -name '*')
 
-# dependencies
-DEPS=.cache/deps
-
+# build
 BUILD=dist
 # ---
-BUILD_FOLDERS=$(find $(BUILD) -type d)
-BUILD_FILES=$(find $(BUILD) -type f -name '*')
+CLI_ENTRY_POINT=$(SOURCE)/cli.ts
+TEST_ENTRY_POINTS=$(find $(SOURCE) -type f -name '*.test.ts')
 
+CLI_BUILD=$(BUILD)/cli.js
+TEST_BUILD_FOLDERS_AND_FILES=$(BUILD)/file-scripts \
+	$(BUILD)/trello-scripts \
+	$(find $(BUILD) -type d -name '__tests__') \
+	$(find $(BUILD) -type f -name '*.test.ts')
+
+# documentation
 DOCS=documentation
 APP_VERSION=$(cat package.json | jq -r '.version')
 
 # we need to "unpack" these flags at buildtime with the "+s" function
 BUILD_FLAGS=--target+node+--no-minify+--public-url+$$PWD/dist
 +s=$(subst +, ,$1)
-
-CLI_ENTRY_POINT=$(SOURCE)/cli.ts
-CLI_BUILD=$(BUILD)/cli.js
-
-TEST_ENTRY_POINT=$(SOURCE)/**/__tests__/*.test.ts
 
 # -- commands --
 .PHONY: start \
@@ -44,13 +49,12 @@ TEST_ENTRY_POINT=$(SOURCE)/**/__tests__/*.test.ts
 	clear-deps \
 	clear-build \
 	clear-docs \
-	clear-all \
-	_deps
+	clear-all
 
-start: $(CLI_BUILD)
-	node $(CLI_BUILD)
+start: $(CLI_BUILD) $(CREDS)
+	node $(CLI_BUILD) ${CMD}
 
-code: deps
+code: $(DEP_FILES)
 	code $(SOURCE)
 
 lint: $(GIT)
@@ -59,25 +63,27 @@ lint: $(GIT)
 		then yarn eslint $$changes ;\
 	fi
 
-test: $(BUILD_FILES)
+test: $(TEST_BUILD_FOLDERS_AND_FILES)
 	yarn ava
 
-# TODO: this doesn't work, because of the ESModule + Parcel issue
+# TODO - this doesn't work, because of the ESModule + Parcel issue
 # watch:
 # 	yarn concurrently \
-# 		'yarn parcel watch $(TEST_ENTRY_POINT) $(call +s, $(BUILD_FLAGS))' \
+# 		'yarn parcel watch $(TEST_ENTRY_POINTS) $(call +s, $(BUILD_FLAGS))' \
 # 		'yarn ava --watch'
 
 patch: $(GIT) $(DOCS)
 	yarn config set version-git-message "v%s [ci skip]" ;\
-	yarn version --patch
+	yarn version --patch ;\
+	git add $(DOCS) ;\
+	git commit --fixup --amend
 
 release: 
 	yarn publish --access public
 
 clear-deps:
 	rm -rf node_modules ;\
-	rm -rf $(DEPS) ;\
+	rm -rf $(DEP_FOLDER) ;\
 	rm yarn.lock
 
 clear-build:
@@ -92,51 +98,47 @@ clear-all: clear-deps clear-build clear-docs
 $(CREDS): $(CRED_TEMPLATE_PATH)
 	cp $(CRED_TEMPLATE) $(CREDS) && code $(CREDS)
 
-$(CLI_BUILD): _deps $(CREDS) $(SOURCE_FILES) $(SOURCE_FOLDERS)
+$(CLI_BUILD): $(DEP_FILES) $(SOURCE_FOLDERS_AND_FILES)
 	yarn parcel build $(CLI_ENTRY_POINT) $(call +s, $(BUILD_FLAGS))
 
 # parcel doesn't support ESModules, which AVA runs
-# to get around this, we prepend each generated file with a `parcelRequire` declaration
-$(BUILD_FILES): _deps $(SOURCE_FILES) $(SOURCE_FOLDERS)
-	yarn parcel build $(TEST_ENTRY_POINT) $(call +s, $(BUILD_FLAGS)) ;\
+# to get around this, we prepend each generated file with a `parcelRequire` declaration, plus newline
+$(TEST_BUILD_FOLDERS_AND_FILES): $(DEP_FILES) $(TEST_ENTRY_POINTS)
+	yarn parcel build ./source/**/__tests__/**.test.ts $(call +s, $(BUILD_FLAGS)) ;\
 	find dist -name "*.test.js" | xargs -L 1 sed -i.old '1s;^;var parcelRequire = undefined\; \
 	;'
 
-$(DOCS): _deps $(SOURCE_FILES) $(SOURCE_FOLDERS)
-	yarn -s jsdoc2md ./source/**/**/*.ts > ./documentation/readme.md
+$(DOCS): $(DEP_FILES) $(SOURCE_FOLDERS_AND_FILES)
+	yarn typedoc
+
+# -- dependencies --
 
 # we store previous dependency installs in a temporary folder
 # to decide if we need to retrigger them
-_deps:
-	mkdir -p $(DEPS) ;\
-	make -s $(DEPS)/last_brew ;\
-	make -s $(DEPS)/last_yarn ;\
-	make -s $(DEPS)/last_code ;\
-	echo -e 'done'
+$(DEP_FOLDER):
+	mkdir -p $(DEP_FOLDER)
 
-$(DEPS)/last_code: .vscode/extensions.json
-	echo -e 'installing vscode extensions...' ;\
+Brewfile: $(BREW) $(DEP_FOLDER) $(DEP_FOLDER)/last_brew
+
+$(DEP_FOLDER)/last_brew:
+	brew bundle \
+		> $(DEP_FOLDER)/last_brew 2>&1
+
+yarn.lock: $(DEP_FOLDER) $(DEP_FOLDER)/last_yarn
+
+$(DEP_FOLDER)/last_yarn:
+	yarn install \
+		> $(DEP_FOLDER)/last_yarn 2>&1
+
+.vscode/extensions.json: $(DEP_FOLDER) $(DEP_FOLDER)/last_code
+
+$(DEP_FOLDER)/last_code:
 	cat .vscode/extensions.json |\
 	jq -r '.recommendations | .[]' |\
 	xargs -L 1 code --install-extension \
-		> $(DEPS)/last_code 2>&1
+		> $(DEP_FOLDER)/last_code 2>&1
 
-$(DEPS)/last_yarn: yarn.lock
-	echo -e 'installing node modules...' ;\
-	yarn install \
-		> $(DEPS)/last_yarn 2>&1
-
-$(DEPS)/last_brew: Brewfile
-	echo -e 'installing system dependencies...' ;\
-	brew bundle \
-		> $(DEPS)/last_brew 2>&1
-
-# these targets have no real dependencies (but we need to track their edit history)
-.vscode/extensions.json:
-yarn.lock:
-Brewfile: $(BREW)
-
-# -- tools --
+# -- system tools --
 $(GIT):
 	xcode-select --install ;\
 

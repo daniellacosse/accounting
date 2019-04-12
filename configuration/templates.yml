@@ -9,11 +9,11 @@
 - command: accounting
   mimetype: numbers
   duration: monthly
-  destination: ~/Documents/Accounting/1\)\ Monthly\ Accounting\ Audits/2019
+  destination: ~/Documents/Accounting/2\)\ Monthly\ Accounting\ Audits/2019
   additionalUrls:
         - https://home.personalcapital.com/page/login/app
         - https://www.rescuetime.com/dashboard
-- command: goals
-  mimetype: pages
-  destination: ~/Documents/Accounting/1\)\ Trimesterly\ Planning\ Audits/2019
-  duration: trimesterly
+# - command: goals
+#   mimetype: pages
+#   destination: ~/Documents/Accounting/3\)\ Trimesterly\ Planning\ Audits/2019
+#   duration: trimesterly
