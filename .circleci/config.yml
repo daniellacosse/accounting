@@ -80,6 +80,8 @@ workflows:
               ignore:
                 - master
       - test:
+          requires:
+            - build
           filters:
             branches:
               ignore:
