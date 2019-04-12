@@ -95,9 +95,11 @@ clear-docs:
 clear-all: clear-deps clear-build clear-docs
 
 # -- files --
-$(CREDS): $(CRED_TEMPLATE_PATH)
-	if [[ ${NO_DEPS} ]]; then cp $(CRED_TEMPLATE) $(CREDS); exit 0; fi ;\
-	cp $(CRED_TEMPLATE) $(CREDS) && code $(CREDS)
+$(CREDS): $(CRED_TEMPLATE)
+	cp $(CRED_TEMPLATE) $(CREDS) ;\
+	if [ '${NO_DEPS}' != 'true' ]; then code $(CREDS); fi
+
+$(CRED_TEMPLATE): # manually edited
 
 $(CLI_BUILD): $(DEP_FILES) $(SOURCE_FOLDERS_AND_FILES)
 	yarn parcel build $(CLI_ENTRY_POINT) $(call +s, $(BUILD_FLAGS))
@@ -122,21 +124,21 @@ $(DEP_FOLDER):
 Brewfile: $(BREW) $(DEP_FOLDER) $(DEP_FOLDER)/last_brew
 
 $(DEP_FOLDER)/last_brew:
-	if [[ ${NO_DEPS} ]]; then exit 0; fi ;\
+	if [ '${NO_DEPS}' == 'true' ]; then exit 0; fi ;\
 	brew bundle \
 		> $(DEP_FOLDER)/last_brew 2>&1
 
 yarn.lock: $(DEP_FOLDER) $(DEP_FOLDER)/last_yarn
 
 $(DEP_FOLDER)/last_yarn:
-	if [[ ${NO_DEPS} ]]; then exit 0; fi ;\
+	if [ '${NO_DEPS}' == 'true' ]; then exit 0; fi ;\
 	yarn install \
 		> $(DEP_FOLDER)/last_yarn 2>&1
 
 .vscode/extensions.json: $(DEP_FOLDER) $(DEP_FOLDER)/last_code
 
 $(DEP_FOLDER)/last_code:
-	if [[ ${NO_DEPS} ]]; then exit 0; fi ;\
+	if [ '${NO_DEPS}' == 'true' ]; then exit 0; fi ;\
 	cat .vscode/extensions.json |\
 	jq -r '.recommendations | .[]' |\
 	xargs -L 1 code --install-extension \
