@@ -16,18 +16,28 @@ commands:
           git config user.name 'CircleCI'
           git config user.email '<>'
 
+  set_production_environment:
+    description: "sets the current environment to production"
+    steps:
+      - run: |
+          echo "export ENV=production" >> $BASH_ENV
+          source $BASH_ENV
+
   get_node_modules:
     description: "fetch all necessary node dependencies"
     steps:
+      - set_production_environment
+
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "yarn.lock" }}
             - v1-dependencies-
 
-      - run: make node_modules
+      - run: make -e yarn.lock
 
       - save_cache:
           paths:
+            - .cache/deps
             - node_modules
           key: v1-dependencies-{{ checksum "yarn.lock" }}
 
@@ -39,9 +49,27 @@ jobs:
       - checkout
       - get_node_modules
 
-      - run: make test
+      - run: make -e
+  
+  lint:
+    executor: node
+    
+    steps:
+      - checkout
+      - get_node_modules
+      
+      - run: make -e lint
 
-  update_docs_and_patch:
+  test:
+    executor: node
+
+    steps:
+      - checkout
+      - get_node_modules
+
+      - run: make -e test
+
+  update_docs_and_patch_master:
     executor: node
 
     steps:
@@ -50,44 +78,43 @@ jobs:
       - set_git_user
 
       - run: |
-          make patch
+          set -e
 
-          if [[ $(git diff) ]]; then
-            git add -A
-            git commit --amend --no-edit
-          fi
+          # merge development into master
+          git fetch
+          git checkout master
+          git merge development
 
-          git push origin master --tags
-
-  # TODO:
-  # release:
-  #   executor: node
-
-  #   steps:
-  #     - checkout
-  #     - run: make release
+          # tag master with new version/docs and push
+          make NO_DEPS=true patch
+          git push -u origin master --tags
 
 workflows:
-  version: 2
-
   build:
     jobs:
       - build:
           filters:
             branches:
               ignore:
-                - development
-  staging:
-    jobs:
-      - update_docs_and_patch:
+                - master
+      - lint:
+          requires:
+            - build
           filters:
             branches:
-              only:
-                # - staging
-                - development
-  # master:
-  #   jobs:
-  #     - release:
-  #         filters:
-  #           branches:
-  #             only: master
+              ignore:
+                - master
+      - test:
+          requires:
+            - build
+          filters:
+            branches:
+              ignore:
+                - master
+      - update_docs_and_patch_master:
+          requires:
+            - lint
+            - test
+          filters:
+            branches:
+              only: development

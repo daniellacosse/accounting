@@ -1,11 +1,15 @@
 {
   "recommendations": [
+    "dbaeumer.vscode-eslint",
     "eamodio.gitlens",
     "esbenp.prettier-vscode",
+    "gruntfuggly.todo-tree",
     "joelday.docthis",
-    "dbaeumer.vscode-eslint",
     "rebornix.project-snippets",
-    "wayou.vscode-todo-highlight",
-    "yzhang.markdown-all-in-one"
+    "richie5um2.vscode-sort-json",
+    "sharat.vscode-brewfile",
+    "technosophos.vscode-make",
+    "yzhang.markdown-all-in-one",
+    "zengxingxin.sort-js-object-keys"
   ]
 }
