@@ -1,15 +1,15 @@
 
+# credentials
+CREDS=configuration/credentials.yml
+CRED_TEMPLATE=configuration/credentials.example.yml
+
+# dependencies
 SHELL:=/bin/bash
 GIT:=$(which git)
 BREW:=$(which brew)
 
 BREW_URL=https://raw.githubusercontent.com/Homebrew/install/master/install
 
-# credentials
-CREDS=configuration/credentials.yml
-CRED_TEMPLATE=configuration/credentials.example.yml
-
-# dependencies
 DEP_FOLDER=.cache/deps
 DEP_FILES=Brewfile yarn.lock .vscode/extensions.json
 
@@ -54,7 +54,7 @@ BUILD_FLAGS=--target+node+--no-minify+--public-url+$$PWD/dist
 	clear-docs \
 	clear-all
 
-start: $(CLI_BUILD) $(CREDS)
+start: $(CREDS) $(CLI_BUILD)
 	node $(CLI_BUILD) ${CMD}
 
 code: $(DEP_FILES)
