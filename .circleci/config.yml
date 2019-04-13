@@ -86,7 +86,7 @@ jobs:
           git merge development
 
           # tag master with new version/docs and push
-          make NO_DEPS=true patch
+          make -e patch
           git push -u origin master --tags
 
 workflows:
