@@ -79,7 +79,7 @@ patch: $(GIT) $(DOCS)
 	yarn config set version-git-message "v%s [ci skip]" ;\
 	yarn version --patch ;\
 	git add $(DOCS) ;\
-	git commit --amend --fixup
+	git commit --amend --no-edit
 
 release: 
 	yarn publish --access public
