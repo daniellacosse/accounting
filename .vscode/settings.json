@@ -5,6 +5,7 @@
   "editor.formatOnSave": true,
   "editor.tabCompletion": "onlySnippets",
   "editor.tabSize": 2,
+  "eslint.autoFixOnSave": true,
   "eslint.packageManager": "yarn",
   "eslint.run": "onSave",
   "eslint.validate": ["typescript"],

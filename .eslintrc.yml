@@ -29,3 +29,5 @@ rules:
   "@typescript-eslint/indent": 
     - error
     - 2
+  sort-keys: error
+  sort-imports: error
