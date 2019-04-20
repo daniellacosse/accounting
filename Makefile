@@ -33,6 +33,9 @@ TEST_BUILD_FOLDERS_AND_FILES=$(BUILD)/file-scripts \
 
 # documentation
 DOCS=documentation
+DOC_FOLDERS_AND_FILES=$(find $(DOCS) -type d) \
+	$(find $(DOCS) -type f -name '*')
+
 APP_VERSION=$(cat package.json | jq -r '.version')
 
 # we need to "unpack" these flags at buildtime with the "+s" function
@@ -73,7 +76,7 @@ test: $(TEST_BUILD_FOLDERS_AND_FILES)
 # 		'yarn parcel watch $(TEST_ENTRY_POINTS) $(call +s, $(BUILD_FLAGS))' \
 # 		'yarn ava --watch'
 
-patch: $(GIT) $(DOCS)
+patch: $(GIT) $(DOC_FOLDERS_AND_FILES)
 	yarn config set version-git-message "v%s [ci skip]" ;\
 	yarn version --patch ;\
 	git add $(DOCS) ;\
@@ -112,7 +115,7 @@ $(TEST_BUILD_FOLDERS_AND_FILES): $(DEP_FILES) $(TEST_ENTRY_POINTS)
 	find dist -name "*.test.js" | xargs -L 1 sed -i.old '1s;^;var parcelRequire = undefined\; \
 	;'
 
-$(DOCS): $(DEP_FILES) $(SOURCE_FOLDERS_AND_FILES)
+$(DOC_FOLDERS_AND_FILES): $(DEP_FILES) $(SOURCE_FOLDERS_AND_FILES)
 	yarn typedoc
 
 # -- dependencies --
