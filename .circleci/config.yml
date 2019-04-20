@@ -123,6 +123,8 @@ workflows:
           filters:
             branches:
               only: development
+  release:
+    jobs:
       - release:
           filters:
             branches:
