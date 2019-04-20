@@ -18,12 +18,10 @@ ENV=$($$ENV)
 
 # source code
 SOURCE=source
-# ---
 SOURCE_FOLDERS_AND_FILES=$(find $(SOURCE) -type d) $(find $(SOURCE) -type f -name '*')
 
 # build
 BUILD=dist
-# ---
 CLI_ENTRY_POINT=$(SOURCE)/cli.ts
 TEST_ENTRY_POINTS=$(find $(SOURCE) -type f -name '*.test.ts')
 
@@ -35,6 +33,9 @@ TEST_BUILD_FOLDERS_AND_FILES=$(BUILD)/file-scripts \
 
 # documentation
 DOCS=documentation
+DOC_FOLDERS_AND_FILES=$(find $(DOCS) -type d) \
+	$(find $(DOCS) -type f -name '*')
+
 APP_VERSION=$(cat package.json | jq -r '.version')
 
 # we need to "unpack" these flags at buildtime with the "+s" function
@@ -49,10 +50,10 @@ BUILD_FLAGS=--target+node+--no-minify+--public-url+$$PWD/dist
 	watch \
 	patch \
 	release \
-	clear-deps \
-	clear-build \
-	clear-docs \
-	clear-all
+	flush-deps \
+	flush-build \
+	flush-docs \
+	flush
 
 start: $(CREDS) $(CLI_BUILD)
 	node $(CLI_BUILD) ${CMD}
@@ -61,7 +62,7 @@ code: $(DEP_FILES)
 	code .
 
 lint: $(GIT)
-	changes=$$(git diff --name-only --staged | egrep '\.ts') ;\
+	changes=$$(git diff HEAD^ --name-only --staged | egrep '\.ts') ;\
 	if [[ $$changes ]] ;\
 		then yarn eslint $$changes ;\
 	fi
@@ -75,7 +76,7 @@ test: $(TEST_BUILD_FOLDERS_AND_FILES)
 # 		'yarn parcel watch $(TEST_ENTRY_POINTS) $(call +s, $(BUILD_FLAGS))' \
 # 		'yarn ava --watch'
 
-patch: $(GIT) $(DOCS)
+patch: $(GIT) $(DOC_FOLDERS_AND_FILES)
 	yarn config set version-git-message "v%s [ci skip]" ;\
 	yarn version --patch ;\
 	git add $(DOCS) ;\
@@ -84,18 +85,18 @@ patch: $(GIT) $(DOCS)
 release: 
 	yarn publish --access public
 
-clear-deps:
+flush-deps:
 	rm -rf node_modules ;\
 	rm -rf $(DEP_FOLDER) ;\
 	rm yarn.lock
 
-clear-build:
+flush-build:
 	rm -rf $(BUILD)
 
-clear-docs:
+flush-docs:
 	rm -rf $(DOCS)
 
-clear-all: clear-deps clear-build clear-docs
+flush: flush-deps flush-build flush-docs
 
 # -- files --
 $(CREDS): $(CRED_TEMPLATE)
@@ -114,7 +115,7 @@ $(TEST_BUILD_FOLDERS_AND_FILES): $(DEP_FILES) $(TEST_ENTRY_POINTS)
 	find dist -name "*.test.js" | xargs -L 1 sed -i.old '1s;^;var parcelRequire = undefined\; \
 	;'
 
-$(DOCS): $(DEP_FILES) $(SOURCE_FOLDERS_AND_FILES)
+$(DOC_FOLDERS_AND_FILES): $(DEP_FILES) $(SOURCE_FOLDERS_AND_FILES)
 	yarn typedoc
 
 # -- dependencies --
