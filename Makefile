@@ -18,12 +18,10 @@ ENV=$($$ENV)
 
 # source code
 SOURCE=source
-# ---
 SOURCE_FOLDERS_AND_FILES=$(find $(SOURCE) -type d) $(find $(SOURCE) -type f -name '*')
 
 # build
 BUILD=dist
-# ---
 CLI_ENTRY_POINT=$(SOURCE)/cli.ts
 TEST_ENTRY_POINTS=$(find $(SOURCE) -type f -name '*.test.ts')
 
@@ -49,10 +47,10 @@ BUILD_FLAGS=--target+node+--no-minify+--public-url+$$PWD/dist
 	watch \
 	patch \
 	release \
-	clear-deps \
-	clear-build \
-	clear-docs \
-	clear-all
+	flush-deps \
+	flush-build \
+	flush-docs \
+	flush
 
 start: $(CREDS) $(CLI_BUILD)
 	node $(CLI_BUILD) ${CMD}
@@ -61,7 +59,7 @@ code: $(DEP_FILES)
 	code .
 
 lint: $(GIT)
-	changes=$$(git diff --name-only --staged | egrep '\.ts') ;\
+	changes=$$(git diff HEAD^ --name-only --staged | egrep '\.ts') ;\
 	if [[ $$changes ]] ;\
 		then yarn eslint $$changes ;\
 	fi
@@ -84,18 +82,18 @@ patch: $(GIT) $(DOCS)
 release: 
 	yarn publish --access public
 
-clear-deps:
+flush-deps:
 	rm -rf node_modules ;\
 	rm -rf $(DEP_FOLDER) ;\
 	rm yarn.lock
 
-clear-build:
+flush-build:
 	rm -rf $(BUILD)
 
-clear-docs:
+flush-docs:
 	rm -rf $(DOCS)
 
-clear-all: clear-deps clear-build clear-docs
+flush: flush-deps flush-build flush-docs
 
 # -- files --
 $(CREDS): $(CRED_TEMPLATE)

@@ -69,7 +69,7 @@ jobs:
 
       - run: make -e test
 
-  update_docs_and_patch_master:
+  update_docs_and_patch:
     executor: node
 
     steps:
@@ -80,14 +80,11 @@ jobs:
       - run: |
           set -e
 
-          # merge development into master
-          git fetch
-          git checkout master
-          git merge development
+          git checkout $CIRCLE_BRANCH
 
           # tag master with new version/docs and push
           make -e patch
-          git push -u origin master --tags
+          git push -u origin $CIRCLE_BRANCH --tags 
 
 workflows:
   build:
@@ -98,21 +95,18 @@ workflows:
               ignore:
                 - master
       - lint:
-          requires:
-            - build
           filters:
             branches:
               ignore:
                 - master
       - test:
-          requires:
-            - build
           filters:
             branches:
               ignore:
                 - master
-      - update_docs_and_patch_master:
+      - update_docs_and_patch:
           requires:
+            - build
             - lint
             - test
           filters:
