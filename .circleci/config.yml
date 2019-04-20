@@ -86,6 +86,17 @@ jobs:
           make -e patch
           git push -u origin $CIRCLE_BRANCH --tags 
 
+  release:
+    executor: node
+
+    steps:
+      - checkout
+      - get_node_modules
+      - set_git_user
+
+      - run: make -e release
+
+
 workflows:
   build:
     jobs:
@@ -112,3 +123,7 @@ workflows:
           filters:
             branches:
               only: development
+      - release:
+          filters:
+            branches:
+              only: master

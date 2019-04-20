@@ -83,7 +83,7 @@ patch: $(GIT) $(DOC_FOLDERS_AND_FILES)
 	git commit --amend --no-edit
 
 release: 
-	yarn publish --access public
+	yarn publish --new-version $(APP_VERSION) --access public
 
 flush-deps:
 	rm -rf node_modules ;\
