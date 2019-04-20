@@ -9,4 +9,5 @@ configuration/credentials.yml
 dist
 
 # code coverage
+coverage
 .nyc_output
