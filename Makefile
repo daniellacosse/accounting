@@ -59,7 +59,7 @@ code: $(DEP_FILES)
 	code .
 
 lint: $(GIT)
-	changes=$$(git diff HEAD^ --name-only --staged | egrep '\.ts') ;\
+	changes=$$(git diff --diff-filter=MA HEAD^ --name-only --staged | egrep '\.ts') ;\
 	if [[ $$changes ]] ;\
 		then yarn eslint $$changes ;\
 	fi
