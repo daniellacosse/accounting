@@ -8,18 +8,22 @@
   },
   "dependencies": {
     "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.4.3",
     "@babel/preset-typescript": "^7.1.0",
+    "@types/jest": "^24.0.11",
     "@types/lodash.find": "^4.6.6",
     "@types/node": "^11.11.3",
     "@types/sinon": "^7.0.10",
     "@typescript-eslint/eslint-plugin": "^1.5.0",
     "@typescript-eslint/parser": "^1.5.0",
     "ava": "^1.3.1",
+    "babel-plugin-convert-to-json": "^0.1.0",
     "babel-plugin-module-resolver": "3.2.0",
     "concurrently": "^4.1.0",
     "consola": "^2.5.6",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.1.0",
+    "jest": "^24.7.1",
     "lodash.find": "^4.6.0",
     "moment": "^2.22.1",
     "parcel-bundler": "^1.12.2",
@@ -42,12 +46,12 @@
     "url": "git+https://github.com/daniellacosse/accounting-cli.git"
   },
   "scripts": {
-    "ava": "./node_modules/ava/cli.js",
+    "jest": "./node_modules/jest/bin/jest.js",
     "concurrently": "./node_modules/concurrently/bin/concurrently.js",
     "make-lint": "make lint",
     "parcel": "./node_modules/parcel-bundler/bin/cli.js",
     "eslint": "./node_modules/eslint/bin/eslint.js",
     "typedoc": "./node_modules/typedoc/bin/typedoc"
   },
-  "version": "0.0.5"
+  "version": "0.0.7"
 }

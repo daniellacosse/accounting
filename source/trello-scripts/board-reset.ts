@@ -1,4 +1,4 @@
-import find = require("lodash.find");
+import find from "lodash.find";
 
 import getISOStartTimeForCard from "./get-iso-start-time-for-card";
 

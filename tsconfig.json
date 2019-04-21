@@ -12,7 +12,7 @@
     "resolveJsonModule": true,
     "rootDirs": ["."],
     "sourceMap": true,
-    "types": ["node"]
+    "types": ["node", "jest"]
   },
   // we exclude these files to save typescript from having to go through them
   "exclude": [

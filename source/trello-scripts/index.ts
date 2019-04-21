@@ -1,11 +1,9 @@
 import Trello from "trello";
-
-import creds from "configuration/credentials.yml";
-import thisWeekConfig from "configuration/schedule.yml";
-
 import boardReset from "./board-reset";
+import creds from "configuration/credentials.yml";
 import labelRollup from "./label-rollup";
 import { occurredInTheLastWeek } from "./occurred-since";
+import thisWeekConfig from "configuration/schedule.yml";
 
 /**
  * Takes a supported trello command, runs that function, and returns the result.
@@ -19,7 +17,10 @@ export default async function trelloScriptRunner(
   command: string
 ): Promise<string | { [label: string]: string }> {
   const context: TrelloContext = {
-    ...thisWeekConfig,
+    boardID: thisWeekConfig.boardID,
+    templates: thisWeekConfig.templates.sort(
+      (t1, t2) => t1.startTime > t2.startTime
+    ),
     trello: new Trello(creds.trello.key, creds.trello.token)
   };
 
