@@ -129,18 +129,15 @@ workflows:
             branches:
               ignore:
                 - master
-      - update_docs_and_patch:
-          requires:
-            - build
-            - lint
-            - test
-            - coverage
-          filters:
-            branches:
-              only: development
   release:
     jobs:
+      - update_docs_and_patch:
+          filters:
+            branches:
+              only: master
       - release:
+          requires:
+            - update_docs_and_patch
           filters:
             branches:
               only: master
