@@ -1,9 +1,8 @@
-import test from "ava";
 import { fake } from "sinon";
 
 import boardReset from "../board-reset";
 
-test("end-to-end smoke test", async t => {
+test("end-to-end smoke test", async () => {
   const mockCards: TrelloCard[] = [
     {
       due: "",
@@ -46,12 +45,12 @@ test("end-to-end smoke test", async t => {
     Created ${mockTemplates.length} cards!
   `;
 
-  t.is(results, expectedResult);
+  expect(results).toBe(expectedResult);
 
-  t.is(mockContext.trello.addCard.callCount, mockTemplates.length);
-  t.is(mockContext.trello.deleteCard.callCount, mockCards.length);
+  expect(mockContext.trello.addCard.callCount).toBe(mockTemplates.length);
+  expect(mockContext.trello.deleteCard.callCount).toBe(mockCards.length);
 
-  t.is(mockContext.trello.getCard.callCount, 1);
-  t.is(mockContext.trello.getListsOnBoard.callCount, 1);
-  t.is(mockContext.trello.getLabelsForBoard.callCount, 1);
+  expect(mockContext.trello.getCard.callCount).toBe(1);
+  expect(mockContext.trello.getListsOnBoard.callCount).toBe(1);
+  expect(mockContext.trello.getLabelsForBoard.callCount).toBe(1);
 });

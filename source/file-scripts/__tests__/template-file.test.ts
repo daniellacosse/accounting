@@ -1,4 +1,3 @@
-import test from "ava";
 import moment from "moment";
 import path from "path";
 
@@ -21,7 +20,7 @@ const expectedDestFilename = weekly(
 
 const expectedTemplatePath = path.resolve(
   __dirname,
-  `../templates/template.numbers`
+  `../../templates/template.numbers`
 );
 
 const expectedCommands = [
@@ -30,8 +29,8 @@ const expectedCommands = [
   `open https://www.example.com`
 ];
 
-test(`generates correct commands to run`, t => {
+test(`generates correct commands to run`, () => {
   const testCommands = generateTemplateCommands(testConfig);
 
-  t.deepEqual(testCommands, expectedCommands);
+  expect(testCommands).toEqual(expectedCommands);
 });

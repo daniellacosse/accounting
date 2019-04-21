@@ -1,4 +1,3 @@
-import test from "ava";
 import moment from "moment";
 
 import getISOStartTimeForCard from "../get-iso-start-time-for-card";
@@ -13,7 +12,7 @@ const daysOfTheWeek = [
   "Saturday"
 ];
 
-test(`correctly gets ISO start time for the card`, t => {
+test(`correctly gets ISO start time for the card`, () => {
   const yesterday =
     daysOfTheWeek[
       moment()
@@ -35,14 +34,11 @@ test(`correctly gets ISO start time for the card`, t => {
   const expectedHour = 9;
   const expectedMinutes = 30;
 
-  t.is(
-    getISOStartTimeForCard(testTemplate, testList),
-    moment()
-      .add(1, "week")
-      .subtract(1, "day")
-      .hour(expectedHour)
-      .minute(expectedMinutes)
-      .startOf("minute")
-      .toISOString()
-  );
+  expect(getISOStartTimeForCard(testTemplate, testList)).toBe(moment()
+    .add(1, "week")
+    .subtract(1, "day")
+    .hour(expectedHour)
+    .minute(expectedMinutes)
+    .startOf("minute")
+    .toISOString());
 });

@@ -26,10 +26,6 @@ CLI_ENTRY_POINT=$(SOURCE)/cli.ts
 TEST_ENTRY_POINTS=$(find $(SOURCE) -type f -name '*.test.ts')
 
 CLI_BUILD=$(BUILD)/cli.js
-TEST_BUILD_FOLDERS_AND_FILES=$(BUILD)/file-scripts \
-	$(BUILD)/trello-scripts \
-	$(find $(BUILD) -type d -name '__tests__') \
-	$(find $(BUILD) -type f -name '*.test.ts')
 
 # documentation
 DOCS=documentation
@@ -67,14 +63,11 @@ lint: $(GIT)
 		then yarn eslint $$changes ;\
 	fi
 
-test: $(TEST_BUILD_FOLDERS_AND_FILES)
-	yarn ava
+test:
+	yarn jest
 
-# TODO - this doesn't work, because of the ESModule + Parcel issue
-# watch:
-# 	yarn concurrently \
-# 		'yarn parcel watch $(TEST_ENTRY_POINTS) $(call +s, $(BUILD_FLAGS))' \
-# 		'yarn ava --watch'
+watch:
+	yarn jest --watch
 
 patch: $(GIT) $(DOC_FOLDERS_AND_FILES)
 	yarn config set version-git-message "v%s [ci skip]" ;\
@@ -107,13 +100,6 @@ $(CRED_TEMPLATE): # manually edited
 
 $(CLI_BUILD): $(DEP_FILES) $(SOURCE_FOLDERS_AND_FILES)
 	yarn parcel build $(CLI_ENTRY_POINT) $(call +s, $(BUILD_FLAGS))
-
-# parcel doesn't support ESModules, which AVA runs
-# to get around this, we prepend each generated file with a `parcelRequire` declaration, plus newline
-$(TEST_BUILD_FOLDERS_AND_FILES): $(DEP_FILES) $(TEST_ENTRY_POINTS)
-	yarn parcel build ./source/**/__tests__/**.test.ts $(call +s, $(BUILD_FLAGS)) ;\
-	find dist -name "*.test.js" | xargs -L 1 sed -i.old '1s;^;var parcelRequire = undefined\; \
-	;'
 
 $(DOC_FOLDERS_AND_FILES): $(DEP_FILES) $(SOURCE_FOLDERS_AND_FILES)
 	yarn typedoc

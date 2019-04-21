@@ -1,11 +1,10 @@
-import test from "ava";
 import moment from "moment";
 
 import constants from "configuration/constants.yml";
 
 import { occurredInTheLastWeek } from "../occurred-since";
 
-test(`checks if a card correctly occurred in the last week`, t => {
+test(`checks if a card correctly occurred in the last week`, () => {
   const testCard: TrelloCard = {
     due: moment()
       .days(-1)
@@ -26,6 +25,6 @@ test(`checks if a card correctly occurred in the last week`, t => {
     labels: []
   };
 
-  t.true(occurredInTheLastWeek(testCard));
-  t.false(occurredInTheLastWeek(testCard2));
+  expect(occurredInTheLastWeek(testCard)).toBe(true);
+  expect(occurredInTheLastWeek(testCard2)).toBe(false);
 });
