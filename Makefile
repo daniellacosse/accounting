@@ -121,7 +121,6 @@ $(DEP_FOLDER)/last_brew:
 yarn.lock: $(DEP_FOLDER) $(DEP_FOLDER)/last_yarn
 
 $(DEP_FOLDER)/last_yarn:
-	if [ "$(ENV)" == "production" ]; then exit 0; fi ;\
 	yarn install \
 		> $(DEP_FOLDER)/last_yarn 2>&1
 
