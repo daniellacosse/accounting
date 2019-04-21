@@ -1,17 +1,15 @@
 boardID: 5ae498ab94b06f3fcf3262fa
 templates:
-  - name: morning pills
+  - name: morning pills/wakeup
     startTime: "06:30"
     listNames:
-      - Sunday
       - Monday
       - Tuesday
       - Wednesday
       - Thursday
       - Friday
-      - Saturday
   - name: exercise
-    startTime: "07:00"
+    startTime: "07:30"
     labelNames:
       - health
     listNames:
@@ -20,47 +18,53 @@ templates:
       - Wednesday
       - Thursday
       - Friday
+  - name: morning pills/wakeup
+    startTime: "09:30"
+    listNames:
+      - Saturday
+      - Sunday
   - name: start work
-    startTime: "9:00"
+    startTime: "9:30"
     listNames:
       - Monday
       - Tuesday
       - Wednesday
       - Thursday
       - Friday
-  - name: leave work
-    startTime: "17:00"
-    listNames:
-      - Monday
-      - Tuesday
-      - Wednesday
-      - Thursday
-      - Friday
-  # - name: therapy
-  #   startTime: "10:15"
-  #   labelNames:
-  #     - health
-  #   listNames:
-  #     - Thursday
   - name: weekly accounting
-    startTime: "11:00"
+    startTime: "13:00"
     labelNames:
       - accounting
     listNames:
       - Sunday
     checklist:
+      - laundry
       - straighten up/spot clean
+      - sort files
+      - emails/contacts
       - put away groceries/dishes
       - take out trash
-      - laundry
       - weekly checkup
       - audit (if any)
-      - sort files
-      - pill boxes
       - pill shakes
       - stew (if needed)
+  - name: exercise
+    startTime: "15:00"
+    labelNames:
+      - health
+    listNames:
+      - Saturday
+      - Sunday
+  - name: leave work
+    startTime: "17:30"
+    listNames:
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
   - name: weekly right
-    startTime: "20:00"
+    startTime: "19:00"
     labelNames:
       - right plan
     listNames:
@@ -69,7 +73,7 @@ templates:
       - typing practice
       - code something
   - name: weekly left
-    startTime: "20:00"
+    startTime: "19:00"
     labelNames:
       - left plan
     listNames:
@@ -77,24 +81,6 @@ templates:
     checklist:
       - performance practice
       - create something
-  - name: exercise
-    startTime: "13:00"
-    labelNames:
-      - health
-    listNames:
-      - Sunday
-  - name: exercise - aerobic
-    startTime: "14:00"
-    labelNames:
-      - health
-    listNames:
-      - Saturday
-  - name: exercise - yoga
-    startTime: "14:00"
-    labelNames:
-      - health
-    listNames:
-      - Sunday
   - name: evening pills
     startTime: "22:30"
     listNames:
