@@ -124,6 +124,11 @@ workflows:
             branches:
               ignore:
                 - master
+      - coverage:
+          filters:
+            branches:
+              ignore:
+                - master
       - update_docs_and_patch:
           requires:
             - build
