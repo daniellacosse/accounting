@@ -2,7 +2,8 @@ module.exports = {
   coverageThreshold: {
     global: {
       /*
-       * The rationale I'm trying out here is as follows -
+       * I want to test most paths without being too obnoxious. The rationale I'm trying out
+       * is as follows -
        *
        * O
        * | - - - - - \
@@ -14,8 +15,10 @@ module.exports = {
        *
        * Individual functions shouldn't have more branches than this
        * unless it's in very extreme cases. Oftern terniaries at this level
-       * of depth are for simple type-checking. I want to test most paths without
-       * being too obnoxious.
+       * of depth are for simple type-checking.
+       *
+       * As our default debugging solution is in the tests, this will give us ample entry points
+       * into the inspector
        */
       branches: 87.5
     }
