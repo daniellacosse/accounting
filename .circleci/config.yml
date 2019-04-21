@@ -69,6 +69,24 @@ jobs:
 
       - run: make -e test
 
+  test:
+    executor: node
+
+    steps:
+      - checkout
+      - get_node_modules
+
+      - run: make -e test
+
+  coverage:
+    executor: node
+
+    steps:
+      - checkout
+      - get_node_modules
+
+      - run: make -e coverage
+
   update_docs_and_patch:
     executor: node
 
@@ -120,6 +138,7 @@ workflows:
             - build
             - lint
             - test
+            - coverage
           filters:
             branches:
               only: development

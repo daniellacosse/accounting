@@ -43,6 +43,7 @@ BUILD_FLAGS=--target+node+--no-minify+--public-url+$$PWD/dist
 	code \
 	lint \
 	test \
+	coverage \
 	watch \
 	patch \
 	release \
@@ -64,7 +65,10 @@ lint: $(GIT)
 	fi
 
 test:
-	yarn jest
+	yarn jest --ci
+
+coverage:
+	yarn jest --ci --coverage
 
 watch:
 	yarn jest --watch
