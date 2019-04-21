@@ -1,6 +1,5 @@
-import moment from "moment";
-
 import constants from "configuration/constants.yml";
+import moment from "moment";
 
 /**
  * Function factory for filter functions that determine if a trello card was due in a certain
@@ -16,10 +15,6 @@ export default function hasOccurredIn(
   days: number
 ): (card: TrelloCard) => boolean {
   return ({ due }) => {
-    if (!due) {
-      return false;
-    }
-
     const sevenDaysAgo: moment.Moment = moment()
       .day(-1 * days)
       .startOf("day");

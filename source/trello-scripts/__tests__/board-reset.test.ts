@@ -2,13 +2,29 @@ import { fake } from "sinon";
 
 import boardReset from "../board-reset";
 
+interface TrelloChecklist {}
+
 test("end-to-end smoke test", async () => {
+  const mockLabels: TrelloLabel[] = [
+    {
+      id: "abc",
+      name: "label1"
+    }
+  ];
+
   const mockCards: TrelloCard[] = [
     {
       due: "",
       dueComplete: true,
       id: "123",
-      labels: []
+      labels: [mockLabels[0]]
+    },
+    {
+      due: "",
+      dueComplete: true,
+      id: "456",
+      labels: [],
+      idChecklists: ["890"]
     }
   ];
 
@@ -16,7 +32,14 @@ test("end-to-end smoke test", async () => {
     {
       listNames: ["testList"],
       name: "testCard",
+      labelNames: ["label1"],
       startTime: "12:30"
+    },
+    {
+      listNames: ["testList"],
+      name: "testCard2",
+      startTime: "11:00",
+      checklist: ["option1", "option2"]
     }
   ];
 
@@ -31,6 +54,8 @@ test("end-to-end smoke test", async () => {
     trello: {
       addCard: fake.returns(Promise.resolve(mockCards[0])),
       addDueDateToCard: fake.returns(Promise.resolve(mockCards[0])),
+      addChecklistToCard: fake.returns(Promise.resolve({ id: "890" })),
+      addItemToChecklist: fake.returns(Promise.resolve({ id: "890" })),
       deleteCard: fake(),
       getCard: fake(),
       getLabelsForBoard: fake.returns(Promise.resolve([])),
@@ -47,10 +72,22 @@ test("end-to-end smoke test", async () => {
 
   expect(results).toBe(expectedResult);
 
-  expect(mockContext.trello.addCard.callCount).toBe(mockTemplates.length);
-  expect(mockContext.trello.deleteCard.callCount).toBe(mockCards.length);
+  const {
+    addCard,
+    deleteCard,
+    getCard,
+    addChecklistToCard,
+    addItemToChecklist,
+    getListsOnBoard,
+    getLabelsForBoard
+  } = mockContext.trello;
 
-  expect(mockContext.trello.getCard.callCount).toBe(1);
-  expect(mockContext.trello.getListsOnBoard.callCount).toBe(1);
-  expect(mockContext.trello.getLabelsForBoard.callCount).toBe(1);
+  expect(addCard.callCount).toBe(mockTemplates.length);
+  expect(deleteCard.callCount).toBe(mockCards.length);
+  expect(getCard.callCount).toBe(mockTemplates.length);
+
+  expect(addChecklistToCard.callCount).toBe(1);
+  expect(addItemToChecklist.callCount).toBe(2);
+  expect(getListsOnBoard.callCount).toBe(1);
+  expect(getLabelsForBoard.callCount).toBe(1);
 });

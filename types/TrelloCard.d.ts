@@ -36,4 +36,12 @@ interface TrelloCard {
    * @memberof TrelloCard
    */
   labels: TrelloLabel[];
+
+  /**
+   * A list of checklists attached to this card.
+   *
+   * @type {TrelloChecklist}
+   * @memberof TrelloCard
+   */
+  idChecklists?: string[];
 }
