@@ -13,7 +13,7 @@ const daysOfTheWeek = [
   "Saturday"
 ];
 
-test(`correctly gets ISO start time for the card`, $ => {
+test(`correctly gets ISO start time for the card`, t => {
   const yesterday =
     daysOfTheWeek[
       moment()
@@ -35,7 +35,7 @@ test(`correctly gets ISO start time for the card`, $ => {
   const expectedHour = 9;
   const expectedMinutes = 30;
 
-  $.is(
+  t.is(
     getISOStartTimeForCard(testTemplate, testList),
     moment()
       .add(1, "week")

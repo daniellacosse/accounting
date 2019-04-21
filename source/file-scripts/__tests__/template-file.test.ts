@@ -30,8 +30,8 @@ const expectedCommands = [
   `open https://www.example.com`
 ];
 
-test(`generates correct commands to run`, $ => {
+test(`generates correct commands to run`, t => {
   const testCommands = generateTemplateCommands(testConfig);
 
-  $.deepEqual(testCommands, expectedCommands);
+  t.deepEqual(testCommands, expectedCommands);
 });

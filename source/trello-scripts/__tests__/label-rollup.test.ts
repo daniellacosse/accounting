@@ -2,7 +2,7 @@ import test from "ava";
 
 import labelRollup from "../label-rollup";
 
-test("properly counts cards", async $ => {
+test("properly counts cards", async t => {
   const testLabelOne: TrelloLabel = {
     id: "1",
     name: "label-1"
@@ -41,6 +41,6 @@ test("properly counts cards", async $ => {
 
   return Promise.all([labelRollup(testCards), expectedResult]).then(
     ([testResults, expectedResults]) =>
-      $.deepEqual(testResults, expectedResults)
+      t.deepEqual(testResults, expectedResults)
   );
 });

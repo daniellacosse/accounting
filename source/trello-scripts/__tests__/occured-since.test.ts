@@ -5,7 +5,7 @@ import constants from "configuration/constants.yml";
 
 import { occurredInTheLastWeek } from "../occurred-since";
 
-test(`checks if a card correctly occurred in the last week`, $ => {
+test(`checks if a card correctly occurred in the last week`, t => {
   const testCard: TrelloCard = {
     due: moment()
       .days(-1)
@@ -26,6 +26,6 @@ test(`checks if a card correctly occurred in the last week`, $ => {
     labels: []
   };
 
-  $.true(occurredInTheLastWeek(testCard));
-  $.false(occurredInTheLastWeek(testCard2));
+  t.true(occurredInTheLastWeek(testCard));
+  t.false(occurredInTheLastWeek(testCard2));
 });

@@ -3,7 +3,7 @@ import { fake } from "sinon";
 
 import boardReset from "../board-reset";
 
-test("end-to-end smoke test", async $ => {
+test("end-to-end smoke test", async t => {
   const mockCards: TrelloCard[] = [
     {
       due: "",
@@ -46,12 +46,12 @@ test("end-to-end smoke test", async $ => {
     Created ${mockTemplates.length} cards!
   `;
 
-  $.is(results, expectedResult);
+  t.is(results, expectedResult);
 
-  $.is(mockContext.trello.addCard.callCount, mockTemplates.length);
-  $.is(mockContext.trello.deleteCard.callCount, mockCards.length);
+  t.is(mockContext.trello.addCard.callCount, mockTemplates.length);
+  t.is(mockContext.trello.deleteCard.callCount, mockCards.length);
 
-  $.is(mockContext.trello.getCard.callCount, 1);
-  $.is(mockContext.trello.getListsOnBoard.callCount, 1);
-  $.is(mockContext.trello.getLabelsForBoard.callCount, 1);
+  t.is(mockContext.trello.getCard.callCount, 1);
+  t.is(mockContext.trello.getListsOnBoard.callCount, 1);
+  t.is(mockContext.trello.getLabelsForBoard.callCount, 1);
 });
