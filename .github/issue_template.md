@@ -1,6 +1,6 @@
 ## goal 🏆
 
-_What problem do we want to solve?_
+_What problem do we want to solve and why?_
 
 ## resources 🕵️‍♀️
 

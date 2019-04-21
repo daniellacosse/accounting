@@ -19,11 +19,5 @@ export default function getISOStartTimeForCard(
     .day(dayList.name)
     .startOf("day"); // the lists are named after the days of the week
 
-  const startOfToday: moment.Moment = moment().startOf("day");
-
-  if (dueDate.isBefore(startOfToday)) {
-    dueDate.add(1, "weeks");
-  }
-
   return dueDate.set({ hour, minute }).toISOString();
 }
