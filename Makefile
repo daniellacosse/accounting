@@ -5,7 +5,7 @@ CRED_TEMPLATE=configuration/credentials.example.yml
 
 # dependencies
 SHELL:=/bin/bash
-GIT:=$(which git)
+GIT:=$(SHELL) $(which git)
 BREW:=$(which brew)
 
 BREW_URL=https://raw.githubusercontent.com/Homebrew/install/master/install
@@ -13,23 +13,21 @@ BREW_URL=https://raw.githubusercontent.com/Homebrew/install/master/install
 DEP_FOLDER=.cache/deps
 DEP_FILES=Brewfile yarn.lock .vscode/extensions.json
 
-# environment
+# environment TODO: .env file
 ENV=$($$ENV)
 
 # source code
-SOURCE=source
-SOURCE_FOLDERS_AND_FILES=$(find $(SOURCE) -type d) $(find $(SOURCE) -type f -name '*')
+SOURCE=./source
+SOURCE_FOLDERS_AND_FILES:=$(find $(SOURCE) -type d) $(find $(SOURCE) -type f -name '*')
 
 # build
 BUILD=dist
 CLI_ENTRY_POINT=$(SOURCE)/cli.ts
-TEST_ENTRY_POINTS=$(find $(SOURCE) -type f -name '*.test.ts')
-
 CLI_BUILD=$(BUILD)/cli.js
 
 # documentation
 DOCS=documentation
-DOC_FOLDERS_AND_FILES=$(find $(DOCS) -type d) \
+DOC_FOLDERS_AND_FILES:=$(find $(DOCS) -type d) \
 	$(find $(DOCS) -type f -name '*')
 
 APP_VERSION=$(cat package.json | jq -r '.version')
@@ -50,13 +48,17 @@ BUILD_FLAGS=--target+node+--no-minify+--public-url+$$PWD/dist
 	flush-deps \
 	flush-build \
 	flush-docs \
-	flush
+	flush tmp
 
-start: $(CREDS) $(CLI_BUILD)
+tmp:
+	echo $(GIT)
+
+start: $(CLI_BUILD)
 	node $(CLI_BUILD) ${CMD}
 
 code: $(DEP_FILES)
-	code .
+	code . ;\
+	make watch
 
 lint: $(GIT)
 	changes=$$(git diff --diff-filter=MA HEAD^ --name-only --staged | egrep '\.ts') ;\
@@ -96,17 +98,17 @@ flush-docs:
 flush: flush-deps flush-build flush-docs
 
 # -- files --
-$(CREDS): $(CRED_TEMPLATE)
-	cp -f $(CRED_TEMPLATE) $(CREDS) ;\
-	if [ "$(ENV)" != "production" ]; then code $(CREDS); fi
-
-$(CRED_TEMPLATE): # manually edited
-
-$(CLI_BUILD): $(DEP_FILES) $(SOURCE_FOLDERS_AND_FILES)
+$(CLI_BUILD): $(DEP_FILES) $(CRED_TEMPLATE) $(SOURCE_FOLDERS_AND_FILES)
 	yarn parcel build $(CLI_ENTRY_POINT) $(call +s, $(BUILD_FLAGS))
 
 $(DOC_FOLDERS_AND_FILES): $(DEP_FILES) $(SOURCE_FOLDERS_AND_FILES)
 	yarn typedoc
+
+$(CRED_TEMPLATE): $(CREDS)
+
+$(CREDS):
+	cp -f $(CRED_TEMPLATE) $(CREDS) ;\
+	if [ "$(ENV)" != "production" ]; then code $(CREDS); fi
 
 # -- dependencies --
 
