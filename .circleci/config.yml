@@ -19,13 +19,12 @@ commands:
   set_production_environment:
     description: "sets the current environment to production"
     steps:
-      - run: |
-          echo "export ENV=production" >> $BASH_ENV
-          source $BASH_ENV
+      - run: echo "ENV=production" > .env
 
-  get_node_modules:
+  get_dependencies:
     description: "fetch all necessary node dependencies"
     steps:
+      - checkout
       - set_production_environment
 
       - restore_cache:
@@ -33,7 +32,7 @@ commands:
             - v1-dependencies-{{ checksum "yarn.lock" }}
             - v1-dependencies-
 
-      - run: make -e yarn.lock
+      - run: make yarn.lock
 
       - save_cache:
           paths:
@@ -46,44 +45,39 @@ jobs:
     executor: node
 
     steps:
-      - checkout
-      - get_node_modules
+      - get_dependencies
 
-      - run: make -e
+      - run: make
   
   lint:
     executor: node
     
     steps:
-      - checkout
-      - get_node_modules
+      - get_dependencies
       
-      - run: make -e lint
+      - run: make lint
 
   test:
     executor: node
 
     steps:
-      - checkout
-      - get_node_modules
+      - get_dependencies
 
-      - run: make -e test
+      - run: make test
 
   coverage:
     executor: node
 
     steps:
-      - checkout
-      - get_node_modules
+      - get_dependencies
 
-      - run: make -e coverage
+      - run: make coverage
 
   update_docs_and_patch:
     executor: node
 
     steps:
-      - checkout
-      - get_node_modules
+      - get_dependencies
       - set_git_user
 
       - run: |
@@ -92,19 +86,17 @@ jobs:
           git checkout $CIRCLE_BRANCH
 
           # tag master with new version/docs and push
-          make -e patch
-          git push -u origin $CIRCLE_BRANCH --tags 
+          make patch
+          git push origin $CIRCLE_BRANCH --tags 
 
   release:
     executor: node
 
     steps:
-      - checkout
-      - get_node_modules
+      - get_dependencies
       - set_git_user
 
-      - run: make -e release
-
+      - run: make release
 
 workflows:
   build:

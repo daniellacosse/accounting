@@ -1,14 +1,17 @@
-node_modules
-yarn-error.log
+# system
+.env
 .DS_Store
 
-# app-specific
-configuration/credentials.yml
+# yarn
+node_modules
+yarn-error.log
+
+# jest
+coverage
 
 # parceljs
 .cache
 dist
 
-# code coverage
-coverage
-.nyc_output
+# app-specific
+configuration/credentials.yml
