@@ -141,4 +141,4 @@ $(GIT):
 	done
 
 $(BREW):
-	/usr/bin/ruby -e $$(curl -fsSL $(BREW_URL))
+	$(shell which ruby) -e $$(curl -fsSL $(BREW_URL))
