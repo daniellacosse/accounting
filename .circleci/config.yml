@@ -27,10 +27,11 @@ commands:
       - run: sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
 
   get_dependencies:
-    description: "fetch all necessary node dependencies"
+    description: "fetch all necessary dependencies"
     steps:
       - checkout
       - set_production_environment
+      - get_brew
 
       - restore_cache:
           keys:
