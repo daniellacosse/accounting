@@ -20,6 +20,11 @@ commands:
     description: "sets the current environment to production"
     steps:
       - run: echo "ENV=production" > .env
+  
+  get_brew:
+    description: "installs homebrew"
+    steps:
+      - run: sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
 
   get_dependencies:
     description: "fetch all necessary node dependencies"
@@ -47,7 +52,7 @@ jobs:
     steps:
       - get_dependencies
 
-      - run: make
+      - run: "make CMD=echo:stub"
   
   lint:
     executor: node

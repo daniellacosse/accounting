@@ -49,7 +49,7 @@ APP_VERSION:=$(shell cat package.json | jq -r '.version')
 	flush
 
 start: $(CLI_BUILD)
-	node $(CLI_BUILD) ${CMD}
+	node $(CLI_BUILD) $(CMD)
 
 code: $(DEP_FILES)
 	code .
@@ -113,7 +113,6 @@ $(DEP_FOLDER):
 Brewfile: | $(BREW) $(DEP_FOLDER) $(DEP_FOLDER)/last_brew
 
 $(DEP_FOLDER)/last_brew:
-	if [ "$(ENV)" == "production" ]; then exit 0; fi ;\
 	brew bundle \
 		> $(DEP_FOLDER)/last_brew 2>&1
 
@@ -126,19 +125,7 @@ $(DEP_FOLDER)/last_yarn:
 .vscode/extensions.json: | $(DEP_FOLDER) $(DEP_FOLDER)/last_code
 
 $(DEP_FOLDER)/last_code:
-	if [ "$(ENV)" == "production" ]; then exit 0; fi ;\
 	cat .vscode/extensions.json |\
 	jq -r '.recommendations | .[]' |\
 	xargs -L 1 code --install-extension \
 		> $(DEP_FOLDER)/last_code 2>&1
-
-# -- system tools --
-$(GIT):
-	xcode-select --install ;\
-
-	until [ "$$(which git)" ] ;\ 
-		sleep 1 ;\
-	done
-
-$(BREW):
-	$(shell which ruby) -e $$(curl -fsSL $(BREW_URL))
