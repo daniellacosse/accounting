@@ -1,10 +1,9 @@
 {
-  "[typescript]": {
-    "editor.wordWrapColumn": 95
-  },
+  "coverage-gutters.showGutterCoverage": true,
   "editor.formatOnSave": true,
   "editor.tabCompletion": "onlySnippets",
   "editor.tabSize": 2,
+  "editor.wordWrapColumn": 95,
   "eslint.autoFixOnSave": true,
   "eslint.packageManager": "yarn",
   "eslint.run": "onSave",

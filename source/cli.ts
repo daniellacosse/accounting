@@ -1,10 +1,9 @@
 // #!/usr/bin/env node
 
+import constants from "configuration/constants.yml";
 import fileScriptRunner from "./file-scripts";
 import main from "./main";
 import trelloScriptRunner from "./trello-scripts";
-
-import constants from "configuration/constants.yml";
 
 /*
   commands are passed to this script in the form of <DOMAIN>:<COMMAND>
@@ -25,6 +24,9 @@ main(async () => {
 
     case "file":
       return fileScriptRunner(COMMAND);
+
+    case "echo":
+      return Promise.resolve(`echoing: ${COMMAND}`);
 
     default:
       return Promise.reject(`
