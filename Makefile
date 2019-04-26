@@ -25,8 +25,6 @@ DOCS=documentation
 DOC_FOLDERS_AND_FILES:=$(shell find $(DOCS) -type d) \
 	$(shell find $(DOCS) -type f -name '*')
 
-APP_VERSION=$(shell cat package.json | jq -r '.version')
-
 # -- commands --
 .PHONY: start \
 	code \
@@ -50,6 +48,7 @@ code: $(DEP_FILES)
 
 branch:
 	git checkout development ;\
+	git pull ;\
 	git checkout -b $(NAME)
 
 lint:
@@ -73,7 +72,8 @@ release: $(DOC_FOLDERS_AND_FILES)
 	yarn version --patch ;\
 	git add $(DOCS) ;\
 	git commit --amend --no-edit ;\
-	yarn publish --new-version $(APP_VERSION) --access public
+	NEW_APP_VERSION=$$(cat package.json | jq -r '.version') ;\
+	yarn publish --new-version $(NEW_APP_VERSION) --access public
 
 flush-deps:
 	rm -rf node_modules ;\
