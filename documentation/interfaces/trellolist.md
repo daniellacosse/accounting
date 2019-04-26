@@ -29,7 +29,7 @@ A list of trello cards on a trello board as returned from the Trello API
 
 **● id**: *`string`*
 
-*Defined in [types/TrelloList.d.ts:14](https://github.com/daniellacosse/accounting-cli/blob/b08b8ee/types/TrelloList.d.ts#L14)*
+*Defined in [types/TrelloList.d.ts:14](https://github.com/daniellacosse/accounting-cli/blob/d229964/types/TrelloList.d.ts#L14)*
 
 The ID of the list as returned by the trello API
 
@@ -44,7 +44,7 @@ ___
 
 **● name**: *`string`*
 
-*Defined in [types/TrelloList.d.ts:22](https://github.com/daniellacosse/accounting-cli/blob/b08b8ee/types/TrelloList.d.ts#L22)*
+*Defined in [types/TrelloList.d.ts:22](https://github.com/daniellacosse/accounting-cli/blob/d229964/types/TrelloList.d.ts#L22)*
 
 The display name of the list
 

@@ -30,7 +30,7 @@ Context required for trello reset to remove and construct new cards
 
 **● boardID**: *`string`*
 
-*Defined in [types/TrelloContext.d.ts:14](https://github.com/daniellacosse/accounting-cli/blob/b08b8ee/types/TrelloContext.d.ts#L14)*
+*Defined in [types/TrelloContext.d.ts:14](https://github.com/daniellacosse/accounting-cli/blob/d229964/types/TrelloContext.d.ts#L14)*
 
 The identifier of the board to work with
 
@@ -45,7 +45,7 @@ ___
 
 **● templates**: *[TrelloTemplate](trellotemplate.md)[]*
 
-*Defined in [types/TrelloContext.d.ts:22](https://github.com/daniellacosse/accounting-cli/blob/b08b8ee/types/TrelloContext.d.ts#L22)*
+*Defined in [types/TrelloContext.d.ts:22](https://github.com/daniellacosse/accounting-cli/blob/d229964/types/TrelloContext.d.ts#L22)*
 
 Templates of cards to be created
 
@@ -60,7 +60,7 @@ ___
 
 **● trello**: *`any`*
 
-*Defined in [types/TrelloContext.d.ts:30](https://github.com/daniellacosse/accounting-cli/blob/b08b8ee/types/TrelloContext.d.ts#L30)*
+*Defined in [types/TrelloContext.d.ts:30](https://github.com/daniellacosse/accounting-cli/blob/d229964/types/TrelloContext.d.ts#L30)*
 
 The api object to use in deleting/creating cards.
 

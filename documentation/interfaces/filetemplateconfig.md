@@ -30,7 +30,7 @@ Config for setting the source and destination of a confg job.
 
 **● additionalUrls**: *`string`[]*
 
-*Defined in [types/FileTemplateConfig.d.ts:43](https://github.com/daniellacosse/accounting-cli/blob/b08b8ee/types/FileTemplateConfig.d.ts#L43)*
+*Defined in [types/FileTemplateConfig.d.ts:43](https://github.com/daniellacosse/accounting-cli/blob/d229964/types/FileTemplateConfig.d.ts#L43)*
 
 any additional resources that need to be opened in order for the user to complete the document.
 
@@ -45,7 +45,7 @@ ___
 
 **● command**: *`string`*
 
-*Defined in [types/FileTemplateConfig.d.ts:14](https://github.com/daniellacosse/accounting-cli/blob/b08b8ee/types/FileTemplateConfig.d.ts#L14)*
+*Defined in [types/FileTemplateConfig.d.ts:14](https://github.com/daniellacosse/accounting-cli/blob/d229964/types/FileTemplateConfig.d.ts#L14)*
 
 the cli command that triggers the specific template. must match the template filename as well.
 
@@ -60,7 +60,7 @@ ___
 
 **● destination**: *`string`*
 
-*Defined in [types/FileTemplateConfig.d.ts:28](https://github.com/daniellacosse/accounting-cli/blob/b08b8ee/types/FileTemplateConfig.d.ts#L28)*
+*Defined in [types/FileTemplateConfig.d.ts:28](https://github.com/daniellacosse/accounting-cli/blob/d229964/types/FileTemplateConfig.d.ts#L28)*
 
 the absolute location of where the resulting file should go.
 
@@ -75,7 +75,7 @@ ___
 
 **● duration**: *"weekly" \| "monthly" \| "trimesterly" \| "yearly"*
 
-*Defined in [types/FileTemplateConfig.d.ts:35](https://github.com/daniellacosse/accounting-cli/blob/b08b8ee/types/FileTemplateConfig.d.ts#L35)*
+*Defined in [types/FileTemplateConfig.d.ts:35](https://github.com/daniellacosse/accounting-cli/blob/d229964/types/FileTemplateConfig.d.ts#L35)*
 
 the period of time in which the file recurs.
 
@@ -90,7 +90,7 @@ ___
 
 **● mimetype**: *"numbers" \| "pages"*
 
-*Defined in [types/FileTemplateConfig.d.ts:21](https://github.com/daniellacosse/accounting-cli/blob/b08b8ee/types/FileTemplateConfig.d.ts#L21)*
+*Defined in [types/FileTemplateConfig.d.ts:21](https://github.com/daniellacosse/accounting-cli/blob/d229964/types/FileTemplateConfig.d.ts#L21)*
 
 the mimetype - what kind of template is it?
 
