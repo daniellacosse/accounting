@@ -88,7 +88,7 @@ jobs:
           git checkout $CIRCLE_BRANCH
 
           # tag master with new version/docs and push
-          make patch
+          make release
           git push origin $CIRCLE_BRANCH --tags
 
           # merge master back into development and push
