@@ -61,7 +61,7 @@ lint: $(GIT)
 	fi
 
 test:
-	if [ "$(ENV)" == "production" ]; then TEST_FLAGS=--bail; fi ;\
+	if [ "$(ENV)" == "ci" ]; then TEST_FLAGS=--bail; fi ;\
 	yarn jest $$TEST_FLAGS
 
 coverage:
@@ -98,7 +98,7 @@ $(CLI_BUILD): $(SOURCE_FOLDERS_AND_FILES) | $(DEP_FILES) $(CREDS)
 
 $(CREDS): $(CRED_TEMPLATE)
 	cp -f $(CRED_TEMPLATE) $(CREDS) ;\
-	if [ "$(ENV)" != "production" ]; then code $(CREDS); fi
+	if [ "$(ENV)" != "ci" ]; then code $(CREDS); fi
 
 $(DOC_FOLDERS_AND_FILES): $(SOURCE_FOLDERS_AND_FILES) $(DEP_FILES)
 	yarn typedoc
@@ -113,6 +113,7 @@ $(DEP_FOLDER):
 Brewfile: | $(BREW) $(DEP_FOLDER) $(DEP_FOLDER)/last_brew
 
 $(DEP_FOLDER)/last_brew:
+	if [ $(ENV) == "ci" ]; then exit 0; fi ;\
 	brew bundle \
 		> $(DEP_FOLDER)/last_brew 2>&1
 
@@ -125,6 +126,7 @@ $(DEP_FOLDER)/last_yarn:
 .vscode/extensions.json: | $(DEP_FOLDER) $(DEP_FOLDER)/last_code
 
 $(DEP_FOLDER)/last_code:
+	if [ $(ENV) == "ci" ]; then exit 0; fi ;\
 	cat .vscode/extensions.json |\
 	jq -r '.recommendations | .[]' |\
 	xargs -L 1 code --install-extension \

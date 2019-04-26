@@ -21,20 +21,13 @@ commands:
   set_production_environment:
     description: "sets the current environment to production"
     steps:
-      - run: echo "ENV=production" > .env
+      - run: echo "ENV=ci" > .env
   
-  get_brew:
-    description: "installs homebrew"
-    steps:
-      - run: |
-          sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-
   get_dependencies:
     description: "fetch all necessary dependencies"
     steps:
       - checkout
       - set_production_environment
-      - get_brew
 
       - restore_cache:
           keys:
@@ -42,6 +35,7 @@ commands:
             - v1-dependencies-
 
       - run: make yarn.lock
+      - run: apt-get install -y jq
 
       - save_cache:
           paths:
