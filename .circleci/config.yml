@@ -23,6 +23,8 @@ commands:
   
   get_brew:
     description: "installs homebrew"
+    environment:
+      USER: ""
     steps:
       - run: sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
 
