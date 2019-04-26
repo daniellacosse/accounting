@@ -10,3 +10,7 @@ brew "yarn"
 
 # recommended editor
 cask "visual-studio-code", args: { force: true }
+
+# ci
+cask "docker", args: { force: true }
+brew "circleci"

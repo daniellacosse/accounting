@@ -25,49 +25,55 @@ DOCS=documentation
 DOC_FOLDERS_AND_FILES:=$(shell find $(DOCS) -type d) \
 	$(shell find $(DOCS) -type f -name '*')
 
+# ci
+CI_CONFIG=.circleci/config.yml
+LOCAL_CI_CONFIG=.circleci/config.local.yml
+
 # -- commands --
-.PHONY: start \
-	code \
+.PHONY: default \
 	branch \
 	lint \
 	test \
-	coverage \
 	watch \
-	patch \
-	release \
-	flush-deps \
-	flush-build \
-	flush-docs \
-	flush
+	coverage \
+	ci \
+	release! \
+	flush-deps! \
+	flush-build! \
+	flush-docs! \
+	flush-ci! \
+	flush-coverage! \
+	flush-tmp! \
+	flush-all!
 
-start: $(CLI_BUILD)
+default: $(CLI_BUILD) $(DEP_FILES)
 	node $(CLI_BUILD) $(CMD)
-
-code: $(DEP_FILES)
-	code .
 
 branch:
 	git checkout master ;\
 	git pull ;\
 	git checkout -b $(NAME)
 
-lint:
+lint: $(DEP_FILES)
 	changes=$$(git diff --diff-filter=MA HEAD^ --name-only --staged | egrep '\.ts') ;\
 	if [[ $$changes ]] ;\
 		then yarn eslint $$changes ;\
 	fi
 
-test:
+test: $(DEP_FILES)
 	if [ "$(ENV)" == "ci" ]; then TEST_FLAGS=--bail; fi ;\
 	yarn jest $$TEST_FLAGS
 
-coverage:
-	yarn jest --coverage
-
-watch:
+watch: $(DEP_FILES)
 	yarn jest --watch
 
-release: $(DOC_FOLDERS_AND_FILES)
+coverage: $(DEP_FILES)
+	yarn jest --coverage
+
+ci: $(LOCAL_CI_CONFIG) $(DEP_FILES)
+	circleci local execute --job $(JOB) --config $(LOCAL_CI_CONFIG)
+
+release!: $(DOC_FOLDERS_AND_FILES) $(DEP_FILES)
 	yarn config set version-git-message "v%s [ci skip]" ;\
 	yarn version --patch ;\
 	git add $(DOCS) ;\
@@ -75,18 +81,25 @@ release: $(DOC_FOLDERS_AND_FILES)
 	NEW_APP_VERSION=$$(cat package.json | jq -r '.version') ;\
 	yarn publish --new-version $$NEW_APP_VERSION --access public
 
-flush-deps:
+flush-deps!:
 	rm -rf node_modules ;\
 	rm -rf $(DEP_FOLDER) ;\
 	rm yarn.lock
 
-flush-build:
+flush-build!:
 	rm -rf $(BUILD)
 
-flush-docs:
+flush-docs!:
 	rm -rf $(DOCS)
 
-flush: flush-deps flush-build flush-docs
+flush-ci!:
+	rm -rf $(LOCAL_CI_CONFIG)
+
+flush-coverage!:
+	rm -rf coverage
+
+flush-tmp!: flush-deps flush-build flush-ci flush-coverage
+flush-all!: flush-tmp flush-docs
 
 # -- files --	
 $(CLI_BUILD): $(SOURCE_FOLDERS_AND_FILES) | $(DEP_FILES) $(CREDS)
@@ -99,6 +112,9 @@ $(CREDS): $(CRED_TEMPLATE)
 $(DOC_FOLDERS_AND_FILES): $(SOURCE_FOLDERS_AND_FILES) $(DEP_FILES)
 	make flush-docs ;\
 	yarn typedoc
+
+$(LOCAL_CI_CONFIG): $(CI_CONFIG) $(DEP_FILES)
+	circleci config process $(CI_CONFIG) > $(LOCAL_CI_CONFIG)
 
 # -- dependencies --
 

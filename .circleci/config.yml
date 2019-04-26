@@ -75,7 +75,7 @@ jobs:
 
       - run: make coverage
 
-  release_patch:
+  release!:
     executor: node
 
     steps:
@@ -88,7 +88,7 @@ jobs:
           git checkout $CIRCLE_BRANCH
 
           # tag master with new version/docs and push
-          make release
+          make release!
           git push origin $CIRCLE_BRANCH --tags
 
 workflows:
@@ -116,7 +116,7 @@ workflows:
                 - master
   release:
     jobs:
-      - release_patch:
+      - release!:
           filters:
             branches:
               only: master
