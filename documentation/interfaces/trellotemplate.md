@@ -32,7 +32,7 @@ A template for a new, multi-list trello card
 
 **● checklist**: *`string`[]*
 
-*Defined in [types/TrelloTemplate.d.ts:47](https://github.com/daniellacosse/accounting-cli/blob/79da2fe/types/TrelloTemplate.d.ts#L47)*
+*Defined in [types/TrelloTemplate.d.ts:47](https://github.com/daniellacosse/accounting-cli/blob/b08b8ee/types/TrelloTemplate.d.ts#L47)*
 
 List of items to be completed on the card.
 
@@ -47,7 +47,7 @@ ___
 
 **● labelNames**: *`string`[]*
 
-*Defined in [types/TrelloTemplate.d.ts:30](https://github.com/daniellacosse/accounting-cli/blob/79da2fe/types/TrelloTemplate.d.ts#L30)*
+*Defined in [types/TrelloTemplate.d.ts:30](https://github.com/daniellacosse/accounting-cli/blob/b08b8ee/types/TrelloTemplate.d.ts#L30)*
 
 The display names of the labels (if any) that are to be added to each instance of the card
 
@@ -62,7 +62,7 @@ ___
 
 **● listNames**: *`string`[]*
 
-*Defined in [types/TrelloTemplate.d.ts:22](https://github.com/daniellacosse/accounting-cli/blob/79da2fe/types/TrelloTemplate.d.ts#L22)*
+*Defined in [types/TrelloTemplate.d.ts:22](https://github.com/daniellacosse/accounting-cli/blob/b08b8ee/types/TrelloTemplate.d.ts#L22)*
 
 The display names of the lists that this card should be added to
 
@@ -77,7 +77,7 @@ ___
 
 **● name**: *`string`*
 
-*Defined in [types/TrelloTemplate.d.ts:14](https://github.com/daniellacosse/accounting-cli/blob/79da2fe/types/TrelloTemplate.d.ts#L14)*
+*Defined in [types/TrelloTemplate.d.ts:14](https://github.com/daniellacosse/accounting-cli/blob/b08b8ee/types/TrelloTemplate.d.ts#L14)*
 
 The display text of the card
 
@@ -92,7 +92,7 @@ ___
 
 **● startTime**: *`string`*
 
-*Defined in [types/TrelloTemplate.d.ts:39](https://github.com/daniellacosse/accounting-cli/blob/79da2fe/types/TrelloTemplate.d.ts#L39)*
+*Defined in [types/TrelloTemplate.d.ts:39](https://github.com/daniellacosse/accounting-cli/blob/b08b8ee/types/TrelloTemplate.d.ts#L39)*
 
 The due date of the card (effectively, due to chronofy integration, this basically becomes the "startTime")
 
