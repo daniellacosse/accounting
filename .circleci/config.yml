@@ -91,11 +91,6 @@ jobs:
           make release
           git push origin $CIRCLE_BRANCH --tags
 
-          # merge master back into development and push
-          git checkout development
-          git merge master
-          git push origin development
-
 workflows:
   build:
     jobs:
