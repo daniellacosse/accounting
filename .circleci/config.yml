@@ -4,6 +4,8 @@ executors:
   node:
     docker:
       - image: circleci/node:latest
+    environment:
+      USER: ""
 
 commands:
   set_git_user:
@@ -23,8 +25,6 @@ commands:
   
   get_brew:
     description: "installs homebrew"
-    environment:
-      USER: ""
     steps:
       - run: sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
 
