@@ -53,5 +53,5 @@
     "eslint": "./node_modules/eslint/bin/eslint.js",
     "typedoc": "./node_modules/typedoc/bin/typedoc"
   },
-  "version": "0.0.7"
+  "version": "0.0.9"
 }

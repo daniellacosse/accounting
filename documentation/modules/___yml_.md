@@ -18,7 +18,7 @@
 
 **● value**: *`any`*
 
-*Defined in types/yml-shim.d.ts:6*
+*Defined in [types/index.d.ts:11](https://github.com/daniellacosse/accounting-cli/blob/79da2fe/types/index.d.ts#L11)*
 
 ___
 
