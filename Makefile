@@ -47,7 +47,7 @@ code: $(DEP_FILES)
 	code .
 
 branch:
-	git checkout development ;\
+	git checkout master ;\
 	git pull ;\
 	git checkout -b $(NAME)
 
@@ -73,7 +73,7 @@ release: $(DOC_FOLDERS_AND_FILES)
 	git add $(DOCS) ;\
 	git commit --amend --no-edit ;\
 	NEW_APP_VERSION=$$(cat package.json | jq -r '.version') ;\
-	yarn publish --new-version $(NEW_APP_VERSION) --access public
+	yarn publish --new-version $$NEW_APP_VERSION --access public
 
 flush-deps:
 	rm -rf node_modules ;\
