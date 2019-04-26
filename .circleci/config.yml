@@ -17,9 +17,10 @@ commands:
           git config user.email '<>'
 
   set_production_environment:
-    description: "sets the current environment to production"
+    description: "sets up our needed environment variables"
     steps:
-      - run: echo "ENV=ci" > .env
+      - run: echo ENV=ci > .env
+      - run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
   
   get_dependencies:
     description: "fetch all necessary dependencies"
