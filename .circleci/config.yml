@@ -75,7 +75,7 @@ jobs:
 
       - run: make coverage
 
-  update_docs_and_patch:
+  release_patch:
     executor: node
 
     steps:
@@ -89,16 +89,12 @@ jobs:
 
           # tag master with new version/docs and push
           make patch
-          git push origin $CIRCLE_BRANCH --tags 
+          git push origin $CIRCLE_BRANCH --tags
 
-  release:
-    executor: node
-
-    steps:
-      - get_dependencies
-      - set_git_user
-
-      - run: make release
+          # merge master back into development and push
+          git checkout development
+          git merge master
+          git push origin development
 
 workflows:
   build:
@@ -108,30 +104,28 @@ workflows:
             branches:
               ignore:
                 - master
+                - development
       - lint:
           filters:
             branches:
               ignore:
                 - master
+                - development
       - test:
           filters:
             branches:
               ignore:
                 - master
+                - development
       - coverage:
           filters:
             branches:
               ignore:
                 - master
+                - development
   release:
     jobs:
-      - update_docs_and_patch:
-          filters:
-            branches:
-              only: master
-      - release:
-          requires:
-            - update_docs_and_patch
+      - release_patch:
           filters:
             branches:
               only: master

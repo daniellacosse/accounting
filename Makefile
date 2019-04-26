@@ -25,11 +25,12 @@ DOCS=documentation
 DOC_FOLDERS_AND_FILES:=$(shell find $(DOCS) -type d) \
 	$(shell find $(DOCS) -type f -name '*')
 
-APP_VERSION:=$(shell cat package.json | jq -r '.version')
+APP_VERSION=$(shell cat package.json | jq -r '.version')
 
 # -- commands --
 .PHONY: start \
 	code \
+	branch \
 	lint \
 	test \
 	coverage \
@@ -47,7 +48,11 @@ start: $(CLI_BUILD)
 code: $(DEP_FILES)
 	code .
 
-lint: $(GIT)
+branch:
+	git checkout development ;\
+	git checkout -b $(NAME)
+
+lint:
 	changes=$$(git diff --diff-filter=MA HEAD^ --name-only --staged | egrep '\.ts') ;\
 	if [[ $$changes ]] ;\
 		then yarn eslint $$changes ;\
@@ -63,13 +68,11 @@ coverage:
 watch:
 	yarn jest --watch
 
-patch: $(GIT) $(DOC_FOLDERS_AND_FILES)
+release: $(DOC_FOLDERS_AND_FILES)
 	yarn config set version-git-message "v%s [ci skip]" ;\
 	yarn version --patch ;\
 	git add $(DOCS) ;\
-	git commit --amend --no-edit
-
-release: 
+	git commit --amend --no-edit ;\
 	yarn publish --new-version $(APP_VERSION) --access public
 
 flush-deps:
