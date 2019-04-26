@@ -104,25 +104,21 @@ workflows:
             branches:
               ignore:
                 - master
-                - development
       - lint:
           filters:
             branches:
               ignore:
                 - master
-                - development
       - test:
           filters:
             branches:
               ignore:
                 - master
-                - development
       - coverage:
           filters:
             branches:
               ignore:
                 - master
-                - development
   release:
     jobs:
       - release_patch:
