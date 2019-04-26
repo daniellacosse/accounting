@@ -5,7 +5,7 @@ executors:
     docker:
       - image: circleci/node:latest
     environment:
-      USER: ""
+      USER: whoami
 
 commands:
   set_git_user:
@@ -27,7 +27,6 @@ commands:
     description: "installs homebrew"
     steps:
       - run: |
-          sudo chown -R 777 /home/linuxbrew/.linuxbrew
           sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
 
   get_dependencies:
