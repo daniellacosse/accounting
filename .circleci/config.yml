@@ -26,7 +26,9 @@ commands:
   get_brew:
     description: "installs homebrew"
     steps:
-      - run: sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+      - run: |
+          sudo chown -R 777 /home/linuxbrew/.linuxbrew
+          sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
 
   get_dependencies:
     description: "fetch all necessary dependencies"
