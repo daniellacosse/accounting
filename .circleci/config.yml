@@ -91,11 +91,6 @@ jobs:
           make release
           git push origin $CIRCLE_BRANCH --tags
 
-          # merge master back into development and push
-          git checkout development
-          git merge master
-          git push origin development
-
 workflows:
   build:
     jobs:
@@ -104,25 +99,21 @@ workflows:
             branches:
               ignore:
                 - master
-                - development
       - lint:
           filters:
             branches:
               ignore:
                 - master
-                - development
       - test:
           filters:
             branches:
               ignore:
                 - master
-                - development
       - coverage:
           filters:
             branches:
               ignore:
                 - master
-                - development
   release:
     jobs:
       - release_patch:
