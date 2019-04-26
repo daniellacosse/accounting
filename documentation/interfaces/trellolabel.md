@@ -29,7 +29,7 @@ A card label as returned from the trello API
 
 **● id**: *`string`*
 
-*Defined in source/trello-scripts/types/TrelloLabel.d.ts:14*
+*Defined in [types/TrelloLabel.d.ts:14](https://github.com/daniellacosse/accounting-cli/blob/79da2fe/types/TrelloLabel.d.ts#L14)*
 
 The ID of the trello Label
 
@@ -44,7 +44,7 @@ ___
 
 **● name**: *`string`*
 
-*Defined in source/trello-scripts/types/TrelloLabel.d.ts:22*
+*Defined in [types/TrelloLabel.d.ts:22](https://github.com/daniellacosse/accounting-cli/blob/79da2fe/types/TrelloLabel.d.ts#L22)*
 
 The display name of the label
 
