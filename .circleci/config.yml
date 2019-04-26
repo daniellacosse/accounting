@@ -75,7 +75,7 @@ jobs:
 
       - run: make coverage
 
-  release!:
+  release_patch:
     executor: node
 
     steps:
@@ -116,7 +116,7 @@ workflows:
                 - master
   release:
     jobs:
-      - release!:
+      - release_patch:
           filters:
             branches:
               only: master

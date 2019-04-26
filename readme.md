@@ -65,7 +65,7 @@ make ci JOB=<your-circle-job>
  - `list`
  - `test`
  - `coverage`
- - `release!` - _this won't work w/o an SSH key._
+ - `release_patch` - ⚠️ runs `make release!` _this won't work w/o an SSH key._
 
 ### ⚠️ `release!` : publishes a release!!! **BE CAREFUL**
 
