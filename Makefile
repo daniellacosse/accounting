@@ -94,6 +94,7 @@ $(CREDS): $(CRED_TEMPLATE)
 	if [ "$(ENV)" != "ci" ]; then code $(CREDS); fi
 
 $(DOC_FOLDERS_AND_FILES): $(SOURCE_FOLDERS_AND_FILES) $(DEP_FILES)
+	make flush-docs ;\
 	yarn typedoc
 
 # -- dependencies --
