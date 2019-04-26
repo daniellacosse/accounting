@@ -7,13 +7,6 @@ CRED_TEMPLATE=configuration/credentials.example.yml
 # dependencies
 SHELL:=/bin/bash
 
-# if git or brew are not found, we still need a handle to reference them by while building,
-# e.g. `nogit`, `nobrew`
-GIT=$(if $(shell which git), $(shell which git), nogit)
-BREW=$(if $(shell which brew), $(shell which brew), nobrew)
-
-BREW_URL=https://raw.githubusercontent.com/Homebrew/install/master/install
-
 DEP_FOLDER=.cache/deps
 DEP_FILES=Brewfile yarn.lock .vscode/extensions.json
 
@@ -110,7 +103,7 @@ $(DOC_FOLDERS_AND_FILES): $(SOURCE_FOLDERS_AND_FILES) $(DEP_FILES)
 $(DEP_FOLDER):
 	mkdir -p $(DEP_FOLDER)
 
-Brewfile: | $(BREW) $(DEP_FOLDER) $(DEP_FOLDER)/last_brew
+Brewfile: | $(DEP_FOLDER) $(DEP_FOLDER)/last_brew
 
 $(DEP_FOLDER)/last_brew:
 	if [ $(ENV) == "ci" ]; then exit 0; fi ;\
