@@ -9,7 +9,10 @@ SHELL:=/bin/bash
 WHEN_IN=if [[ "$(ENV)" == "$(1)" ]]; then $(2); fi
 
 DEP_FOLDER=.cache/deps
-DEP_FILES=Brewfile yarn.lock .vscode/extensions.json
+DEP_FILES= \
+	$(DEP_FOLDER)/last_brew \
+	$(DEP_FOLDER)/last_yarn \
+	$(DEP_FOLDER)/last_code
 
 # source code
 SOURCE=source
@@ -84,8 +87,7 @@ release!: $(DOC_FOLDERS_AND_FILES) $(DEP_FILES)
 
 flush-deps!:
 	rm -rf node_modules ;\
-	rm -rf $(DEP_FOLDER) ;\
-	rm yarn.lock
+	rm -rf $(DEP_FOLDER)
 
 flush-build!:
 	rm -rf $(BUILD)
@@ -99,8 +101,8 @@ flush-ci!:
 flush-coverage!:
 	rm -rf coverage
 
-flush-tmp!: flush-deps flush-build flush-ci flush-coverage
-flush-all!: flush-tmp flush-docs
+flush-tmp!: flush-deps! flush-build! flush-ci! flush-coverage!
+flush-all!: flush-tmp! flush-docs!
 
 # -- files --	
 $(CLI_BUILD): $(SOURCE_FOLDERS_AND_FILES) $(DEP_FILES) $(CREDS)
@@ -124,22 +126,16 @@ $(LOCAL_CI_CONFIG): $(CI_CONFIG) $(DEP_FILES)
 $(DEP_FOLDER):
 	mkdir -p $(DEP_FOLDER)
 
-Brewfile: $(DEP_FOLDER) $(DEP_FOLDER)/last_brew
-
-$(DEP_FOLDER)/last_brew:
+$(DEP_FOLDER)/last_brew: $(DEP_FOLDER) Brewfile
 	$(call WHEN_IN,circleci,exit 0) ;\
 	brew bundle \
 		> $(DEP_FOLDER)/last_brew 2>&1
 
-yarn.lock: $(DEP_FOLDER) $(DEP_FOLDER)/last_yarn
-
-$(DEP_FOLDER)/last_yarn:
+$(DEP_FOLDER)/last_yarn: $(DEP_FOLDER) yarn.lock
 	yarn install \
 		> $(DEP_FOLDER)/last_yarn 2>&1
 
-.vscode/extensions.json: $(DEP_FOLDER) $(DEP_FOLDER)/last_code
-
-$(DEP_FOLDER)/last_code:
+$(DEP_FOLDER)/last_code: $(DEP_FOLDER) .vscode/extensions.json
 	$(call WHEN_IN,circleci,exit 0) ;\
 	cat .vscode/extensions.json |\
 	jq -r '.recommendations | .[]' |\
