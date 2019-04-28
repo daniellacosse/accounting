@@ -19,8 +19,9 @@ commands:
   set_production_environment:
     description: "sets up our needed environment variables"
     steps:
-      - run: echo ENV=ci > .env
-      - run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
+      - run: | 
+          echo ENV=circleci > .env
+          echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
   
   get_dependencies:
     description: "fetch all necessary dependencies"
