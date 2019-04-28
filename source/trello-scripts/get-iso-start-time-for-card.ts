@@ -19,10 +19,5 @@ export default function getISOStartTimeForCard(
     .day(dayList.name)
     .startOf("day"); // the lists are named after the days of the week
 
-  // if it's not sunday, forge ahead one week
-  if (dueDate.day() !== 0) {
-    dueDate.add(1, "week");
-  }
-
   return dueDate.set({ hour, minute }).toISOString();
 }
