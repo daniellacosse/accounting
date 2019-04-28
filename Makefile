@@ -46,7 +46,7 @@ LOCAL_CI_CONFIG=.circleci/config.local.yml
 	flush-build! flush-ci! flush-coverage! flush-deps! flush-docs! flush-tmp! \
 	flush-all!
 
-default: $(CLI_BUILD) $(DEP_FILES)
+default: $(CLI_BUILD) $(DEP_FILES) configuration/schedule.yml
 	node $(CLI_BUILD) $(CMD)
 
 branch:
