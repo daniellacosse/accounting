@@ -34,7 +34,7 @@ A roll-up of TrelloCards by completion count.
 
 ⊕ **new TrelloRollup**(completed?: *`number`*, total?: *`number`*): [TrelloRollup](trellorollup.md)
 
-*Defined in [source/trello-scripts/label-rollup.ts:22](https://github.com/daniellacosse/accounting-cli/blob/e203785/source/trello-scripts/label-rollup.ts#L22)*
+*Defined in [source/trello-scripts/label-rollup.ts:22](https://github.com/daniellacosse/accounting-cli/blob/fe32054/source/trello-scripts/label-rollup.ts#L22)*
 
 Creates an instance of TrelloRollup.
 
@@ -59,7 +59,7 @@ ___
 
 ▸ **addCompletedCard**(): `void`
 
-*Defined in [source/trello-scripts/label-rollup.ts:51](https://github.com/daniellacosse/accounting-cli/blob/e203785/source/trello-scripts/label-rollup.ts#L51)*
+*Defined in [source/trello-scripts/label-rollup.ts:51](https://github.com/daniellacosse/accounting-cli/blob/fe32054/source/trello-scripts/label-rollup.ts#L51)*
 
 count a completed card
 
@@ -75,7 +75,7 @@ ___
 
 ▸ **addUncompletedCard**(): `void`
 
-*Defined in [source/trello-scripts/label-rollup.ts:41](https://github.com/daniellacosse/accounting-cli/blob/e203785/source/trello-scripts/label-rollup.ts#L41)*
+*Defined in [source/trello-scripts/label-rollup.ts:41](https://github.com/daniellacosse/accounting-cli/blob/fe32054/source/trello-scripts/label-rollup.ts#L41)*
 
 count an uncompleted card
 
@@ -91,7 +91,7 @@ ___
 
 ▸ **toString**(): `string`
 
-*Defined in [source/trello-scripts/label-rollup.ts:62](https://github.com/daniellacosse/accounting-cli/blob/e203785/source/trello-scripts/label-rollup.ts#L62)*
+*Defined in [source/trello-scripts/label-rollup.ts:62](https://github.com/daniellacosse/accounting-cli/blob/fe32054/source/trello-scripts/label-rollup.ts#L62)*
 
 convert the TrelloRollup to a string
 
