@@ -38,13 +38,13 @@ templates:
     listNames:
       - Sunday
     checklist:
+      - weekly checkup
+      - emails/contacts
+      - sort files
       - laundry
       - straighten up/spot clean
-      - sort files
-      - emails/contacts
       - put away groceries/dishes
       - take out trash
-      - weekly checkup
       - audit (if any)
       - pill shakes
       - stew (if needed)
