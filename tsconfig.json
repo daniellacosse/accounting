@@ -3,27 +3,27 @@
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "alwaysStrict": true,
-    "baseUrl": ".",
     "experimentalDecorators": true,
     "lib": ["esnext", "dom", "scripthost"],
-    "module": "commonjs",
+    "module": "es2015",
+    "moduleResolution": "node",
     "outDir": "dist",
     "removeComments": true,
     "resolveJsonModule": true,
-    "rootDirs": ["."],
     "sourceMap": true,
     "types": ["node", "jest"]
   },
   // we exclude these files to save typescript from having to go through them
   "exclude": [
-    "node_modules",
     ".cache",
-    "dist",
+    ".circleci",
+    ".github",
     ".vscode",
     "config",
+    "coverage",
+    "dist",
     "documentation",
-    ".nyc_output",
-    ".circleci"
+    "node_modules"
   ],
   "typedocOptions": {
     "exclude": "**/__tests__/*.ts",

@@ -1,9 +1,8 @@
-# accounting cli
+# accounting cli 🤓 [![CircleCI](https://circleci.com/gh/daniellacosse/accounting-cli.svg?style=svg)]
 
-[![npm version](https://badge.fury.io/js/%40daniellacosse%2Faccounting-cli.svg)](https://badge.fury.io/js/%40daniellacosse%2Faccounting-cli) [![documentation](https://img.shields.io/badge/documentation-blue.svg)](https://github.com/daniellacosse/accounting-cli/tree/master/documentation#process-automation-srcrary-documentation) [![CircleCI](https://circleci.com/gh/daniellacosse/accounting-cli.svg?style=svg)](https://circleci.com/gh/daniellacosse/accounting-cli)
+[![documentation](https://img.shields.io/badge/documentation-blue.svg)](https://github.com/daniellacosse/accounting-cli/tree/master/documentation#process-automation-srcrary-documentation) [![npm version](https://badge.fury.io/js/%40daniellacosse%2Faccounting-cli.svg)](https://badge.fury.io/js/%40daniellacosse%2Faccounting-cli) (https://circleci.com/gh/daniellacosse/accounting-cli)
 
-
-before you get started, you need `brew`: [macos](https://brew.sh/) | [linux](https://docs.brew.sh/Homebrew-on-Linux)
+> before you get started, you need `brew`: [macos](https://brew.sh/) | [linux](https://docs.brew.sh/Homebrew-on-Linux)
 
 ## commands
 
