@@ -30,8 +30,6 @@ CONFIG_FOLDERS_AND_FILES:=tsconfig.json $(shell find $(CONFIG_FOLDER) -type d) \
 	$(shell find $(CONFIG_FOLDER) -type f -name '*')
 
 # tests
-TEST_CONFIG_FOLDER=.jest
-TEST_CONFIG=$(TEST_CONFIG_FOLDER)/jest.config.js
 TEST_COVERAGE_FOLDER=coverage
 TEST_RESULTS=$(BUILD_FOLDER)/.jest-test-results.json
 
@@ -75,13 +73,13 @@ lint: $(DEP_FILES)
 
 test: $(DEP_FILES)
 	$(call WHEN_IN,circleci,flags=--bail) ;\
-	yarn jest $$flags --config $(TEST_CONFIG) --json --outputFile=$(TEST_RESULTS)
+	yarn jest $$flags --json --outputFile=$(TEST_RESULTS)
 
 watch: $(DEP_FILES)
-	yarn jest --watch --config $(TEST_CONFIG)
+	yarn jest --watch
 
 coverage: $(DEP_FILES)
-	yarn jest --coverage --config $(TEST_CONFIG)
+	yarn jest --coverage
 
 ci: $(LOCAL_CI_CONFIG) $(DEP_FILES)
 	circleci local execute --job $(JOB) --config $(LOCAL_CI_CONFIG)
