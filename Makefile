@@ -71,7 +71,7 @@ lint: $(DEP_FILES)
 	changes=$$(git diff --diff-filter=MA $$diff_target --name-only | egrep '\.ts') ;\
 	if [[ $$changes ]]; then yarn eslint $$changes; fi
 
-test: $(DEP_FILES)
+test: $(DEP_FILES) $(BUILD_FOLDER)
 	$(call WHEN_IN,circleci,flags=--bail) ;\
 	yarn jest $$flags --json --outputFile=$(TEST_RESULTS)
 
@@ -115,8 +115,12 @@ flush-tmp!: flush-deps! flush-build! flush-ci! flush-coverage!
 
 flush-all!: flush-tmp! flush-docs!
 
-# -- files --	
-$(CLI_BUILD): $(DEP_FILES) $(SOURCE_FOLDERS_AND_FILES) $(CONFIG_FOLDERS_AND_FILES) $(CREDS)
+# -- files --
+
+$(BUILD_FOLDER):
+	mkdir -p $(BUILD_FOLDER)
+
+$(CLI_BUILD): $(DEP_FILES) $(BUILD_FOLDER) $(SOURCE_FOLDERS_AND_FILES) $(CONFIG_FOLDERS_AND_FILES) $(CREDS)
 	$(call WHEN_IN,,flags=--no-minify) ;\
 	yarn parcel build $(CLI_ENTRY_POINT) $$flags --target node --public-url $$PWD/$(BUILD_FOLDER)
 
