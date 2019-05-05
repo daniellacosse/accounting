@@ -129,7 +129,7 @@ $(CREDS): $(CRED_TEMPLATE)
 	$(call WHEN_IN,,code $(CREDS))
 
 $(DOC_FOLDERS_AND_FILES): $(DEP_FILES) $(SOURCE_FOLDERS_AND_FILES)
-	make flush-docs ;\
+	make flush-docs! ;\
 	yarn typedoc
 
 $(LOCAL_CI_CONFIG): $(DEP_FILES) $(CI_CONFIG)
