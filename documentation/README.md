@@ -44,7 +44,7 @@
 
 ▸ **boardReset**(existingCards: *[TrelloCard](interfaces/trellocard.md)[]*, __namedParameters: *`object`*): `Promise`<`string`>
 
-*Defined in [source/trello-scripts/board-reset.ts:20](https://github.com/daniellacosse/accounting-cli/blob/fe32054/source/trello-scripts/board-reset.ts#L20)*
+*Defined in [source/trello-scripts/board-reset.ts:20](https://github.com/daniellacosse/accounting-cli/blob/68d2886/source/trello-scripts/board-reset.ts#L20)*
 
 Iterates through the cards provided in the given context and deletes them, then going back and replacing them with the cards defined in the `templates.json` file.
 
@@ -77,7 +77,7 @@ ___
 
 ▸ **commandRunner**(commands: *`string`[]*): `string`
 
-*Defined in [source/file-scripts/command-runner.ts:10](https://github.com/daniellacosse/accounting-cli/blob/fe32054/source/file-scripts/command-runner.ts#L10)*
+*Defined in [source/file-scripts/command-runner.ts:10](https://github.com/daniellacosse/accounting-cli/blob/68d2886/source/file-scripts/command-runner.ts#L10)*
 
 Runs the list of given shell commands.
 
@@ -99,7 +99,7 @@ ___
 
 ▸ **fileScriptRunner**(userCommand: *`string`*): `Promise`<`string`>
 
-*Defined in [source/file-scripts/index.ts:11](https://github.com/daniellacosse/accounting-cli/blob/fe32054/source/file-scripts/index.ts#L11)*
+*Defined in [source/file-scripts/index.ts:11](https://github.com/daniellacosse/accounting-cli/blob/68d2886/source/file-scripts/index.ts#L11)*
 
 Takes a supported file command, runs that function, and returns the result.
 
@@ -121,7 +121,7 @@ ___
 
 ▸ **generateTemplateCommands**(__namedParameters: *`object`*): `string`[]
 
-*Defined in [source/file-scripts/template-file.ts:14](https://github.com/daniellacosse/accounting-cli/blob/fe32054/source/file-scripts/template-file.ts#L14)*
+*Defined in [source/file-scripts/template-file.ts:14](https://github.com/daniellacosse/accounting-cli/blob/68d2886/source/file-scripts/template-file.ts#L14)*
 
 Opens up all the resources necessary to complete the Weekly Checkup.
 
@@ -149,7 +149,7 @@ ___
 
 ▸ **getISOStartTimeForCard**(cardTemplate: *[TrelloTemplate](interfaces/trellotemplate.md)*, dayList: *[TrelloList](interfaces/trellolist.md)*): `string`
 
-*Defined in [source/trello-scripts/get-iso-start-time-for-card.ts:12](https://github.com/daniellacosse/accounting-cli/blob/fe32054/source/trello-scripts/get-iso-start-time-for-card.ts#L12)*
+*Defined in [source/trello-scripts/get-iso-start-time-for-card.ts:12](https://github.com/daniellacosse/accounting-cli/blob/68d2886/source/trello-scripts/get-iso-start-time-for-card.ts#L12)*
 
 Generates the appropriate ISOString for the day and time on the Trello objects provided.
 
@@ -174,7 +174,7 @@ ___
 
 ▸ **hasOccurredIn**(days: *`number`*): `function`
 
-*Defined in [source/trello-scripts/occurred-since.ts:14](https://github.com/daniellacosse/accounting-cli/blob/fe32054/source/trello-scripts/occurred-since.ts#L14)*
+*Defined in [source/trello-scripts/occurred-since.ts:14](https://github.com/daniellacosse/accounting-cli/blob/68d2886/source/trello-scripts/occurred-since.ts#L14)*
 
 Function factory for filter functions that determine if a trello card was due in a certain time window.
 
@@ -199,7 +199,7 @@ ___
 
 ▸ **labelRollup**(cards: *[TrelloCard](interfaces/trellocard.md)[]*): `Promise`<`object`>
 
-*Defined in [source/trello-scripts/label-rollup.ts:76](https://github.com/daniellacosse/accounting-cli/blob/fe32054/source/trello-scripts/label-rollup.ts#L76)*
+*Defined in [source/trello-scripts/label-rollup.ts:76](https://github.com/daniellacosse/accounting-cli/blob/68d2886/source/trello-scripts/label-rollup.ts#L76)*
 
 Counts up the provided cards and returns an object representing the total number of cards completed against each card label.
 
@@ -223,7 +223,7 @@ ___
 
 ▸ **main**(routine: *`function`*): `void`
 
-*Defined in [source/main.ts:12](https://github.com/daniellacosse/accounting-cli/blob/fe32054/source/main.ts#L12)*
+*Defined in [source/main.ts:12](https://github.com/daniellacosse/accounting-cli/blob/68d2886/source/main.ts#L12)*
 
 The main runner for this cli - wraps an async routine and handles it appropriately.
 
@@ -245,7 +245,7 @@ ___
 
 ▸ **monthly**(starting: *`Moment`*, dateTemplate?: *`string`*): `string`
 
-*Defined in [source/file-scripts/filename-templator.ts:30](https://github.com/daniellacosse/accounting-cli/blob/fe32054/source/file-scripts/filename-templator.ts#L30)*
+*Defined in [source/file-scripts/filename-templator.ts:30](https://github.com/daniellacosse/accounting-cli/blob/68d2886/source/file-scripts/filename-templator.ts#L30)*
 
 Given a moment date object for the start of the month and, optionally, a template string, returns the filename to be used.
 
@@ -266,7 +266,7 @@ ___
 
 ▸ **trelloScriptRunner**(command: *`string`*): `Promise`<`string` \| `object`>
 
-*Defined in [source/trello-scripts/index.ts:16](https://github.com/daniellacosse/accounting-cli/blob/fe32054/source/trello-scripts/index.ts#L16)*
+*Defined in [source/trello-scripts/index.ts:16](https://github.com/daniellacosse/accounting-cli/blob/68d2886/source/trello-scripts/index.ts#L16)*
 
 Takes a supported trello command, runs that function, and returns the result.
 
@@ -290,7 +290,7 @@ ___
 
 ▸ **weekly**(starting: *`Moment`*, dateTemplate?: *`string`*): `string`
 
-*Defined in [source/file-scripts/filename-templator.ts:12](https://github.com/daniellacosse/accounting-cli/blob/fe32054/source/file-scripts/filename-templator.ts#L12)*
+*Defined in [source/file-scripts/filename-templator.ts:12](https://github.com/daniellacosse/accounting-cli/blob/68d2886/source/file-scripts/filename-templator.ts#L12)*
 
 Given a moment date object for the start of the week and, optionally, a template string, returns the filename to be used.
 

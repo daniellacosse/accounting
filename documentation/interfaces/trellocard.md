@@ -32,7 +32,7 @@ JSON interface for a card as returned from the trello API.
 
 **● due**: *`string`*
 
-*Defined in [types/TrelloCard.d.ts:22](https://github.com/daniellacosse/accounting-cli/blob/fe32054/types/TrelloCard.d.ts#L22)*
+*Defined in [types/TrelloCard.d.ts:22](https://github.com/daniellacosse/accounting-cli/blob/68d2886/types/TrelloCard.d.ts#L22)*
 
 The date at which the card is due.
 
@@ -47,7 +47,7 @@ ___
 
 **● dueComplete**: *`boolean`*
 
-*Defined in [types/TrelloCard.d.ts:30](https://github.com/daniellacosse/accounting-cli/blob/fe32054/types/TrelloCard.d.ts#L30)*
+*Defined in [types/TrelloCard.d.ts:30](https://github.com/daniellacosse/accounting-cli/blob/68d2886/types/TrelloCard.d.ts#L30)*
 
 Whether or not the card is completed.
 
@@ -62,7 +62,7 @@ ___
 
 **● id**: *`string`*
 
-*Defined in [types/TrelloCard.d.ts:14](https://github.com/daniellacosse/accounting-cli/blob/fe32054/types/TrelloCard.d.ts#L14)*
+*Defined in [types/TrelloCard.d.ts:14](https://github.com/daniellacosse/accounting-cli/blob/68d2886/types/TrelloCard.d.ts#L14)*
 
 The identifier of the card in trello.
 
@@ -77,7 +77,7 @@ ___
 
 **● idChecklists**: *`string`[]*
 
-*Defined in [types/TrelloCard.d.ts:46](https://github.com/daniellacosse/accounting-cli/blob/fe32054/types/TrelloCard.d.ts#L46)*
+*Defined in [types/TrelloCard.d.ts:46](https://github.com/daniellacosse/accounting-cli/blob/68d2886/types/TrelloCard.d.ts#L46)*
 
 A list of checklists attached to this card.
 
@@ -92,7 +92,7 @@ ___
 
 **● labels**: *[TrelloLabel](trellolabel.md)[]*
 
-*Defined in [types/TrelloCard.d.ts:38](https://github.com/daniellacosse/accounting-cli/blob/fe32054/types/TrelloCard.d.ts#L38)*
+*Defined in [types/TrelloCard.d.ts:38](https://github.com/daniellacosse/accounting-cli/blob/68d2886/types/TrelloCard.d.ts#L38)*
 
 A list of labels associated with the card.
 
