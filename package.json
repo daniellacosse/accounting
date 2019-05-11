@@ -1,7 +1,7 @@
 {
   "author": "Daniel LaCosse <d@niellacos.se>",
   "bin": {
-    "account": "./dist/source/cli.js"
+    "account": "./dist/cli.js"
   },
   "bugs": {
     "url": "https://github.com/daniellacosse/accounting-cli/issues"

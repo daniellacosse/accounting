@@ -1,7 +1,6 @@
 {
   "coverage-gutters.showGutterCoverage": true,
   "editor.formatOnSave": true,
-  "editor.tabCompletion": "onlySnippets",
   "editor.tabSize": 2,
   "editor.wordWrapColumn": 95,
   "eslint.autoFixOnSave": true,
