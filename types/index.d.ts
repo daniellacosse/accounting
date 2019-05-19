@@ -11,3 +11,6 @@ declare module "*.yml" {
   const value: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   export default value;
 }
+
+type Domain = "trello" | "file" | "echo";
+type Messageable = string | { [label: string]: string };
