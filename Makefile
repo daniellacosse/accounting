@@ -8,7 +8,7 @@ CRED_TEMPLATE=configuration/credentials.example.yml
 SHELL:=/bin/bash
 WHEN_IN=if [[ "$(ENV)" == "$(1)" ]]; then $(2); fi
 
-DEP_FOLDER=.cache/deps
+DEP_FOLDER=.deps
 DEP_FILES= \
 	$(DEP_FOLDER)/last_brew \
 	$(DEP_FOLDER)/last_yarn \
