@@ -11,6 +11,7 @@
   "files.exclude": {
     "**/.DS_Store": true,
     "**/.cache": true,
+    "**/.deps": true,
     "**/.nyc_output": true,
     "**/coverage": true,
     "**/dist": true,
@@ -22,6 +23,7 @@
   "search.exclude": {
     "**/.DS_Store": true,
     "**/.cache": true,
+    "**/.deps": true,
     "**/.nyc_output": true,
     "**/coverage": true,
     "**/dist": true,

@@ -17,6 +17,7 @@
   "exclude": [
     ".cache",
     ".circleci",
+    ".deps",
     ".github",
     ".vscode",
     "config",
