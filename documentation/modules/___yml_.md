@@ -18,7 +18,7 @@
 
 **● value**: *`any`*
 
-*Defined in [types/index.d.ts:11](https://github.com/daniellacosse/accounting-cli/blob/5590464/types/index.d.ts#L11)*
+*Defined in [types/index.d.ts:11](https://github.com/daniellacosse/accounting-cli/blob/ece0a88/types/index.d.ts#L11)*
 
 ___
 
