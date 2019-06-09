@@ -50,5 +50,5 @@
     "parcel": "./node_modules/parcel-bundler/bin/cli.js",
     "typedoc": "./node_modules/typedoc/bin/typedoc"
   },
-  "version": "0.0.16"
+  "version": "0.0.17"
 }
