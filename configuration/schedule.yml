@@ -28,14 +28,14 @@ templates:
     listNames:
       - Saturday
       - Sunday
-  - name: start work
-    startTime: "9:30"
-    listNames:
-      - Monday
-      - Tuesday
-      - Wednesday
-      - Thursday
-      - Friday
+  # - name: start work
+  #   startTime: "9:30"
+  #   listNames:
+  #     - Monday
+  #     - Tuesday
+  #     - Wednesday
+  #     - Thursday
+  #     - Friday
   - name: weekly accounting
     startTime: "13:00"
     labelNames:
@@ -60,14 +60,14 @@ templates:
     listNames:
       - Saturday
       - Sunday
-  - name: leave work
-    startTime: "18:00"
-    listNames:
-      - Monday
-      - Tuesday
-      - Wednesday
-      - Thursday
-      - Friday
+  # - name: leave work
+  #   startTime: "18:00"
+  #   listNames:
+  #     - Monday
+  #     - Tuesday
+  #     - Wednesday
+  #     - Thursday
+  #     - Friday
   - name: exercise - evening
     startTime: "19:00"
     labelNames:
@@ -76,24 +76,24 @@ templates:
       - Monday
       - Wednesday
       - Friday
-  - name: weekly right
+  - name: monthly right
     startTime: "19:00"
     labelNames:
       - right plan
     listNames:
       - Tuesday
     checklist:
-      - typing practice
-      - code something
-  - name: weekly left
+      - typing/coding practice
+      - "monthly project: pick/grind issue"
+  - name: monthly left
     startTime: "19:00"
     labelNames:
       - left plan
     listNames:
       - Thursday
     checklist:
-      - performance practice
-      - create something
+      - performance practice/sketching
+      - "monthly creation: planning/executing"
   - name: evening pills
     startTime: "22:00"
     listNames:
