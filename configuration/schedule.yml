@@ -50,9 +50,7 @@ templates:
       - straighten up/spot clean
       - put away groceries/dishes
       - take out trash
-      - audit (if any)
-      - pill shakes
-      - stew (if needed)
+      - pills
   - name: exercise
     startTime: "15:00"
     labelNames:
