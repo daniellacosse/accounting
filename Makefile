@@ -1,90 +1,158 @@
 -include .env
 
-# credentials
-CREDS=configuration/credentials.yml
-CRED_TEMPLATE=configuration/credentials.example.yml
-
-# dependencies
 SHELL:=/bin/bash
 WHEN_IN=if [[ "$(ENV)" == "$(1)" ]]; then $(2); fi
 
-DEP_FOLDER=.deps
-DEP_FILES= \
-	$(DEP_FOLDER)/last_brew \
-	$(DEP_FOLDER)/last_yarn \
-	$(DEP_FOLDER)/last_code
+# TODO: attempt template:
 
-# source code
-SOURCE_FOLDER=source
-SOURCE_FOLDERS_AND_FILES:=$(shell find $(SOURCE_FOLDER) -type d) \
-	$(shell find $(SOURCE_FOLDER) -type f -name '*')
+# .PHONY: $(2)
 
-# build
-BUILD_FOLDER=dist
-CLI_ENTRY_POINT=$(SOURCE_FOLDER)/cli.ts
-CLI_BUILD=$(BUILD_FOLDER)/cli.js
+# $(1)_PROXY_TARGET=$(PROXY_FOLDER)/$(2)
 
-# config
-CONFIG_FOLDER=configuration
-CONFIG_FOLDERS_AND_FILES:=tsconfig.json $(shell find $(CONFIG_FOLDER) -type d) \
-	$(shell find $(CONFIG_FOLDER) -type f -name '*')
+# $(2): $(PROXY_FOLDER)
+# 	make $($(1)_PROXY_TARGET)
 
-# tests
-TEST_COVERAGE_FOLDER=coverage
-TEST_RESULTS=$(BUILD_FOLDER)/.jest-test-results.json
+# $($(1)_PROXY_TARGET): $(PROJECT_DEPENDENCY_PROXY_TARGETS) $(3)
+# 	$(4)
+# 		> $($(1)_PROXY_TARGET)
 
-# documentation
-DOC_FOLDER=documentation
-DOC_FOLDERS_AND_FILES:=$(shell find $(DOC_FOLDER) -type d) \
-	$(shell find $(DOC_FOLDER) -type f -name '*')
+# ---
 
-# ci
-CI_CONFIG=.circleci/config.yml
-LOCAL_CI_CONFIG=$(BUILD_FOLDER)/config.local.yml
+# $(call COMMAND_TEMPLATE,
+# 	DEFAULT,
+# 	default,
+# 	$(CLI_BUILD),
+# 	node $(CLI_BUILD) $(CMD)
+# )
+
+PROXY_FOLDER=.make
+
+PROJECT_DEPENDENCY_PROXY_TARGETS = \
+	$(PROXY_FOLDER)/Brewfile \
+	$(PROXY_FOLDER)/yarn.lock \
+	$(PROXY_FOLDER)/vscode-extensions.json
 
 # -- commands --
-.PHONY: default \
-	branch \
-	lint \
-	test \
-	watch \
-	coverage \
-	ci \
-	release! \
 
-	flush-build! flush-ci! flush-coverage! flush-deps! flush-docs! flush-tmp! \
-	flush-all!
+.PHONY: \
+	default \
+	\
+	lint test coverage \
+	\
+	ci release release! \
+	\
+	reset reset!
 
-default: $(CLI_BUILD) $(DEP_FILES)
+# -- default --
+
+SOURCE_FOLDER=source
+SOURCE_FILES:=$(shell find $(SOURCE_FOLDER) -type f -name '*')
+
+CONFIG_FOLDER=configuration
+CONFIG_FILES:=tsconfig.json $(shell find $(CONFIG_FOLDER) -type f -name '*')
+
+CLI_ENTRY_POINT=$(SOURCE_FOLDER)/cli.ts
+CLI_BUILD=$(PROXY_FOLDER)/cli.js
+
+CRED_TEMPLATE=$(CONFIG_FOLDER)/credentials.example.yml
+CREDS=$(CONFIG_FOLDER)/credentials.yml
+
+default: $(PROXY_FOLDER)
+	make $(CLI_BUILD) ;\
 	node $(CLI_BUILD) $(CMD)
 
-branch:
-	git checkout master ;\
-	git pull ;\
-	git checkout -b $(NAME)
+$(CLI_BUILD): $(PROJECT_DEPENDENCY_PROXY_TARGETS) $(SOURCE_FILES) $(CONFIG_FILES) $(CREDS)
+	$(call WHEN_IN,,flags=--no-minify) ;\
+	yarn parcel build $(CLI_ENTRY_POINT) $$flags \
+		--target node \
+		--out-dir $(PROXY_FOLDER) \
+		--public-url $$PWD/$(PROXY_FOLDER)
 
-lint: $(DEP_FILES)
+$(CREDS): $(CRED_TEMPLATE)
+	cp -f $(CRED_TEMPLATE) $(CREDS) ;\
+	$(call WHEN_IN,,code $(CREDS))
+
+# -- lint --
+
+LINT_PROXY_TARGET=$(PROXY_FOLDER)/lint
+
+lint: $(PROXY_FOLDER)
+	make $(LINT_PROXY_TARGET)
+
+$(LINT_PROXY_TARGET): $(PROJECT_DEPENDENCY_PROXY_TARGETS) $(SOURCE_FILES)
 	diff_target="HEAD^ --staged" ;\
 	current_branch=$$(git rev-parse --abbrev-ref HEAD) ;\
 	$(call WHEN_IN,circleci,diff_target=master...$$current_branch) ;\
 	\
-	changes=$$(git diff --diff-filter=MA $$diff_target --name-only | egrep '\.ts') ;\
-	if [[ $$changes ]]; then yarn eslint $$changes; fi
+	changes=$$( \
+		git diff \
+		--diff-filter=MA \
+		$$diff_target \
+		--name-only \
+			| egrep '\.ts'\
+	) ;\
+	\
+	if [[ $$changes ]] ;\
+		then yarn eslint $$changes \
+			> $(LINT_PROXY_TARGET) ;\
+	fi
 
-test: $(DEP_FILES) $(BUILD_FOLDER)
-	$(call WHEN_IN,circleci,flags=--bail) ;\
+# -- test --
+
+TEST_RESULTS=$(PROXY_FOLDER)/.jest-test-results.json
+
+test: $(PROXY_FOLDER)
+	make $(TEST_RESULTS)
+
+# TODO: --findRelatedTests / --changedSince
+$(TEST_RESULTS): $(PROJECT_DEPENDENCY_PROXY_TARGETS) $(SOURCE_FILES)
+	$(call WHEN_IN,circleci,flags=--ci --bail) ;\
 	yarn jest $$flags --json --outputFile=$(TEST_RESULTS)
 
-watch: $(DEP_FILES)
-	yarn jest --watch
+# -- coverage --
 
-coverage: $(DEP_FILES)
-	yarn jest --coverage
+COVERAGE_FOLDER=$(PROXY_FOLDER)/coverage
+COVERAGE_FILES=$(shell find $(COVERAGE_FOLDER) -type f -name '*' 2>/dev/null)
 
-ci: $(LOCAL_CI_CONFIG) $(DEP_FILES)
-	circleci local execute --job $(JOB) --config $(LOCAL_CI_CONFIG)
+coverage: $(PROXY_FOLDER)
+	$(call WHEN_IN,circleci,flags=--ci) ;\
+	make $(COVERAGE_FOLDER)
 
-release!: $(DOC_FOLDERS_AND_FILES) $(DEP_FILES)
+$(COVERAGE_FOLDER): $(PROJECT_DEPENDENCY_PROXY_TARGETS) $(SOURCE_FILES)
+	yarn jest --coverage && mv ./coverage $(COVERAGE_FOLDER)
+
+# -- ci --
+
+CI_PROXY_TARGET=$(PROXY_FOLDER)/ci
+
+CI_CONFIG=.circleci/config.yml
+LOCAL_CI_CONFIG=$(PROXY_FOLDER)/config.local.yml
+
+ci: $(PROXY_FOLDER)
+	make $(CI_PROXY_TARGET)
+
+$(CI_PROXY_TARGET): $(PROJECT_DEPENDENCY_PROXY_TARGETS) $(LOCAL_CI_CONFIG)
+	circleci local execute --job $(JOB) --config $(LOCAL_CI_CONFIG) \
+		> $(CI_PROXY_TARGET)
+
+$(LOCAL_CI_CONFIG): $(PROXY_FOLDER) $(CI_CONFIG)
+	circleci config process $(CI_CONFIG) \
+		> $(LOCAL_CI_CONFIG)
+
+# -- release! --
+
+RELEASE_PROXY_TARGET=$(PROXY_FOLDER)/release!
+
+DOC_FOLDER=documentation
+DOC_FILES:=$(shell find $(DOC_FOLDER) -type f -name '*')
+
+release:
+	@echo "Are you sure? - please run 'release!' to confirm."
+
+release!: $(PROXY_FOLDER)
+	make $(RELEASE_PROXY_TARGET)
+
+$(RELEASE_PROXY_TARGET): $(PROJECT_DEPENDENCY_PROXY_TARGETS) $(CLI_BUILD) $(DOC_FILES)
 	yarn config set version-git-message "v%s [ci skip]" ;\
 	yarn version --patch ;\
 	\
@@ -92,68 +160,44 @@ release!: $(DOC_FOLDERS_AND_FILES) $(DEP_FILES)
 	git commit --amend --no-edit ;\
 	\
 	new_version=$$(cat package.json | jq -r '.version') ;\
-	yarn publish --new-version $$new_version --access public
+	yarn publish --new-version $$new_version --access public \
+		> $(RELEASE_PROXY_TARGET)
 
-flush-deps!:
-	rm -rf node_modules ;\
-	rm -rf $(DEP_FOLDER)
-
-flush-build!:
-	rm -rf $(BUILD_FOLDER)
-
-flush-docs!:
-	rm -rf $(DOC_FOLDER)
-
-flush-ci!:
-	rm -rf $(LOCAL_CI_CONFIG)
-
-flush-coverage!:
-	rm -rf $(TEST_COVERAGE_FOLDER)
-
-flush-tmp!: flush-deps! flush-build! flush-ci! flush-coverage!
-	rm -rf .cache
-
-flush-all!: flush-tmp! flush-docs!
-
-# -- files --
-
-$(BUILD_FOLDER):
-	mkdir -p $(BUILD_FOLDER)
-
-$(CLI_BUILD): $(DEP_FILES) $(BUILD_FOLDER) $(SOURCE_FOLDERS_AND_FILES) $(CONFIG_FOLDERS_AND_FILES) $(CREDS)
-	$(call WHEN_IN,,flags=--no-minify) ;\
-	yarn parcel build $(CLI_ENTRY_POINT) $$flags --target node --public-url $$PWD/$(BUILD_FOLDER)
-
-$(CREDS): $(CRED_TEMPLATE)
-	cp -f $(CRED_TEMPLATE) $(CREDS) ;\
-	$(call WHEN_IN,,code $(CREDS))
-
-$(DOC_FOLDERS_AND_FILES): $(DEP_FILES) $(SOURCE_FOLDERS_AND_FILES)
-	make flush-docs! ;\
+$(DOC_FILES): $(SOURCE_FILES)
+	make reset-docs! ;\
 	yarn typedoc
 
-$(LOCAL_CI_CONFIG): $(DEP_FILES) $(CI_CONFIG)
-	circleci config process $(CI_CONFIG) > $(LOCAL_CI_CONFIG)
+# -- reset! --
+
+reset:
+	@echo "Are you sure? - please run 'reset!' to confirm."
+
+reset!:
+	rm -rf $(PROXY_FOLDER)
 
 # -- dependencies --
 
-# we store previous dependency installs in a temporary folder
-# to decide if we need to retrigger them
-$(DEP_FOLDER):
-	mkdir -p $(DEP_FOLDER)
+$(PROXY_FOLDER):
+	mkdir -p $(PROXY_FOLDER)
 
-$(DEP_FOLDER)/last_brew: $(DEP_FOLDER) Brewfile
+$(PROXY_FOLDER)/Brewfile: Brewfile
 	$(call WHEN_IN,circleci,exit 0) ;\
-	brew bundle \
-		> $(DEP_FOLDER)/last_brew 2>&1
+	brew bundle --force \
+		> $(PROXY_FOLDER)/Brewfile
 
-$(DEP_FOLDER)/last_yarn: $(DEP_FOLDER) yarn.lock
+Brewfile: # watch this file
+
+$(PROXY_FOLDER)/yarn.lock: yarn.lock
 	yarn install \
-		> $(DEP_FOLDER)/last_yarn 2>&1
+		> $(PROXY_FOLDER)/yarn.lock
 
-$(DEP_FOLDER)/last_code: $(DEP_FOLDER) .vscode/extensions.json
+yarn.lock: # watch this file
+
+$(PROXY_FOLDER)/vscode-extensions.json: .vscode/extensions.json
 	$(call WHEN_IN,circleci,exit 0) ;\
 	cat .vscode/extensions.json |\
-	jq -r '.recommendations | .[]' |\
-	xargs -L 1 code --install-extension \
-		> $(DEP_FOLDER)/last_code 2>&1
+		jq -r '.recommendations | .[]' |\
+		xargs -L 1 code --install-extension \
+			> $(PROXY_FOLDER)/vscode-extensions.json
+
+.vscode/extensions.json: # watch this file

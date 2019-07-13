@@ -1,5 +1,7 @@
 {
   "coverage-gutters.showGutterCoverage": true,
+  "coverage-gutters.coverageReportFileName": ".make/coverage/**/index.html",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
   "editor.wordWrapColumn": 95,
@@ -11,25 +13,18 @@
   "files.exclude": {
     "**/.DS_Store": true,
     "**/.cache": true,
-    "**/.deps": true,
-    "**/.nyc_output": true,
-    "**/coverage": true,
-    "**/dist": true,
-    "**/node_modules": true,
-    ".circleci/config.local.yml": true
+    "**/.make": true,
+    "**/node_modules": true
   },
   "files.insertFinalNewline": true,
   "prettier.eslintIntegration": true,
   "search.exclude": {
     "**/.DS_Store": true,
     "**/.cache": true,
-    "**/.deps": true,
-    "**/.nyc_output": true,
-    "**/coverage": true,
+    "**/.make": true,
     "**/dist": true,
     "**/documentation": true,
     "**/node_modules": true,
-    "**/yarn.lock": true,
-    ".circleci/config.local.yml": true
+    "**/yarn.lock": true
   }
 }
