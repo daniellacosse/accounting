@@ -17,12 +17,10 @@
   "exclude": [
     ".cache",
     ".circleci",
-    ".deps",
+    ".make",
     ".github",
     ".vscode",
-    "config",
-    "coverage",
-    "dist",
+    "configuration",
     "documentation",
     "node_modules"
   ],

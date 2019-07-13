@@ -9,8 +9,8 @@ brew "jq"
 brew "yarn"
 
 # recommended editor
-cask "visual-studio-code", args: { force: true }
+cask "visual-studio-code"
 
 # ci
-cask "docker", args: { force: true }
+cask "docker"
 brew "circleci"

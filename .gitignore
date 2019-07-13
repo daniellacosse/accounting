@@ -1,6 +1,7 @@
 # system
 .env
 .DS_Store
+.make
 
 # yarn
 node_modules
@@ -11,7 +12,6 @@ yarn-error.log
 coverage
 
 # parceljs
-.deps
 .cache
 dist
 
