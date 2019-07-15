@@ -5,12 +5,15 @@
     "esbenp.prettier-vscode",
     "gruntfuggly.todo-tree",
     "joelday.docthis",
+    "ms-azuretools.vscode-docker",
     "rebornix.project-snippets",
+    "redhat.vscode-yaml",
     "richie5um2.vscode-sort-json",
+    "ryanluker.vscode-coverage-gutters",
     "sharat.vscode-brewfile",
     "technosophos.vscode-make",
     "yzhang.markdown-all-in-one",
     "zengxingxin.sort-js-object-keys",
-    "ryanluker.vscode-coverage-gutters"
+    "ziyasal.vscode-open-in-github"
   ]
 }

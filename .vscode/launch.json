@@ -7,7 +7,7 @@
       "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
       "args": ["-i"],
       "internalConsoleOptions": "openOnSessionStart",
-      "outFiles": ["${workspaceRoot}/.make/**/*"]
+      "outFiles": ["${workspaceRoot}/.make/dist/**/*"]
     }
   ],
   "version": "0.2.0"

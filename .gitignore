@@ -13,7 +13,6 @@ coverage
 
 # parceljs
 .cache
-dist
 
 # circleci
 config.local.yml

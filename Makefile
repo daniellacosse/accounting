@@ -3,28 +3,6 @@
 SHELL:=/bin/bash
 WHEN_IN=if [[ "$(ENV)" == "$(1)" ]]; then $(2); fi
 
-# TODO: attempt template:
-
-# .PHONY: $(2)
-
-# $(1)_PROXY_TARGET=$(PROXY_FOLDER)/$(2)
-
-# $(2): $(PROXY_FOLDER)
-# 	make $($(1)_PROXY_TARGET)
-
-# $($(1)_PROXY_TARGET): $(PROJECT_DEPENDENCY_PROXY_TARGETS) $(3)
-# 	$(4)
-# 		> $($(1)_PROXY_TARGET)
-
-# ---
-
-# $(call COMMAND_TEMPLATE,
-# 	DEFAULT,
-# 	default,
-# 	$(CLI_BUILD),
-# 	node $(CLI_BUILD) $(CMD)
-# )
-
 PROXY_FOLDER=.make
 
 PROJECT_DEPENDENCY_PROXY_TARGETS = \
@@ -96,18 +74,6 @@ $(LINT_PROXY_TARGET): $(PROJECT_DEPENDENCY_PROXY_TARGETS) $(SOURCE_FILES)
 		then yarn eslint $$changes \
 			> $(LINT_PROXY_TARGET) ;\
 	fi
-
-# -- test --
-
-TEST_RESULTS=$(PROXY_FOLDER)/.jest-test-results.json
-
-test: $(PROXY_FOLDER)
-	make $(TEST_RESULTS)
-
-# TODO: --findRelatedTests / --changedSince
-$(TEST_RESULTS): $(PROJECT_DEPENDENCY_PROXY_TARGETS) $(SOURCE_FILES)
-	$(call WHEN_IN,circleci,flags=--ci --bail) ;\
-	yarn jest $$flags --json --outputFile=$(TEST_RESULTS)
 
 # -- coverage --
 
