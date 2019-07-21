@@ -1,8 +1,5 @@
 {
   "author": "Daniel LaCosse <d@niellacos.se>",
-  "bin": {
-    "account": "./dist/cli.js"
-  },
   "bugs": {
     "url": "https://github.com/daniellacosse/accounting-cli/issues"
   },
@@ -36,7 +33,7 @@
   "description": "a self-management CLI",
   "homepage": "https://github.com/daniellacosse/accounting-cli#readme",
   "license": "MIT",
-  "main": "source/cli.ts",
+  "main": "build/index.js",
   "name": "@daniellacosse/accounting-cli",
   "pre-commit": "make-lint",
   "repository": {
