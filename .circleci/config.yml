@@ -19,15 +19,21 @@ commands:
   set_production_environment:
     description: "sets up our needed environment variables"
     steps:
-      - run: | 
+      - run: |
           echo ENV=circleci > .env
           echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
-  
+
   get_dependencies:
     description: "fetch all necessary dependencies"
     steps:
       - checkout
       - set_production_environment
+
+      - run: |
+          git submodule init
+          git submodule update
+
+      - run: sudo apt-get install -y jq
 
       - restore_cache:
           keys:
@@ -35,7 +41,6 @@ commands:
             - v1-dependencies-
 
       - run: make yarn.lock
-      - run: sudo apt-get install -y jq
 
       - save_cache:
           paths:
@@ -51,13 +56,13 @@ jobs:
       - get_dependencies
 
       - run: "make CMD=echo:stub"
-  
+
   lint:
     executor: node
-    
+
     steps:
       - get_dependencies
-      
+
       - run: make lint
 
   test:
