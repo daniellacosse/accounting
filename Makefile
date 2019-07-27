@@ -14,4 +14,4 @@ default: $(PROXY_FOLDER)
 
 $(CREDS): $(CRED_TEMPLATE)
 	cp -f $(CRED_TEMPLATE) $(CREDS) ;\
-	$(call IF_ENV,,code $(CREDS))
+	$(call IF_ENV,local,code $(CREDS))

@@ -20,7 +20,7 @@ commands:
     description: "sets up our needed environment variables"
     steps:
       - run: |
-          echo ENV=circleci > .env
+          echo NODE_ENV=production > .env
           echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
 
   get_dependencies:
