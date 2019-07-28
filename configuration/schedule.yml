@@ -1,7 +1,7 @@
 boardID: 5ae498ab94b06f3fcf3262fa
 templates:
   - name: morning pills/wakeup
-    startTime: "06:00"
+    startTime: "06:30"
     listNames:
       - Monday
       - Tuesday
@@ -9,7 +9,7 @@ templates:
       - Thursday
       - Friday
   - name: exercise - morning
-    startTime: "06:30"
+    startTime: "06:45"
     labelNames:
       - health
     listNames:
@@ -18,13 +18,13 @@ templates:
       - Wednesday
       - Friday
   - name: exercise - yoga
-    startTime: "06:30"
+    startTime: "06:45"
     labelNames:
       - health
     listNames:
       - Thursday
   - name: morning pills/wakeup
-    startTime: "09:30"
+    startTime: "08:30"
     listNames:
       - Saturday
       - Sunday
@@ -37,7 +37,7 @@ templates:
   #     - Thursday
   #     - Friday
   - name: weekly accounting
-    startTime: "13:00"
+    startTime: "11:00"
     labelNames:
       - accounting
     listNames:
