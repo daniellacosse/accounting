@@ -13,5 +13,4 @@ default: $(PROXY_FOLDER)
 	node $(PACKAGE_BUILD) $(CMD)
 
 $(CREDS): $(CRED_TEMPLATE)
-	cp -f $(CRED_TEMPLATE) $(CREDS) ;\
-	$(call IF_ENV,local,code $(CREDS))
+	cp -f $(CRED_TEMPLATE) $(CREDS) $(call IF_ENV,local,&& code $(CREDS))
