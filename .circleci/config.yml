@@ -7,7 +7,7 @@ executors:
 
 commands:
   set_git_user:
-    description: "setup circle CI as a git user"
+    description: "set up circle CI as a helpful git bot"
     steps:
       - add_ssh_keys
 
@@ -17,7 +17,7 @@ commands:
           git config user.email '<>'
 
   set_production_environment:
-    description: "sets up our needed environment variables"
+    description: "set up our needed environment variables"
     steps:
       - run: |
           echo NODE_ENV=production > .env
@@ -29,12 +29,6 @@ commands:
       - checkout
       - set_production_environment
 
-      - run: |
-          git submodule init
-          git submodule update
-
-      - run: sudo apt-get install -y jq
-
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "yarn.lock" }}
@@ -44,7 +38,7 @@ commands:
 
       - save_cache:
           paths:
-            - .cache/deps
+            - .make
             - node_modules
           key: v1-dependencies-{{ checksum "yarn.lock" }}
 

@@ -1,4 +1,6 @@
-include .buildfiles/main.mk .buildfiles/commands/*.mk
+COMMANDS=.buildfiles/main.mk .buildfiles/commands/*.mk
+
+include $(COMMANDS)
 
 # -- default --
 
@@ -14,3 +16,6 @@ default: $(PROXY_FOLDER)
 
 $(CREDS): $(CRED_TEMPLATE)
 	cp -f $(CRED_TEMPLATE) $(CREDS) $(call IF_ENV,local,&& code $(CREDS))
+
+$(COMMANDS):
+	git submodule update --init --recursive
