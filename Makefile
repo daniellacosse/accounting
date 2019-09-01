@@ -20,7 +20,7 @@ $(CREDS): $(CRED_TEMPLATE)
 $(BUILDFILES):
 	git clone git@github.com:daniellacosse/typescript-buildfiles.git $(BUILDFILES)
 
- $(BUILDFILES)/main.mk $(BUILDFILES)/commands/*.mk: $(BUILDFILES)
+$(BUILDFILES)/main.mk $(BUILDFILES)/commands/*.mk: $(BUILDFILES)
 	cd $(BUILDFILES) ;\
 	git pull origin master ;\
 	cd ..
