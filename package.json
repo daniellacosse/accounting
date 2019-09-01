@@ -41,6 +41,7 @@
     "url": "git+https://github.com/daniellacosse/accounting-cli.git"
   },
   "scripts": {
+    "account": "node ./build/cli.js",
     "eslint": "./node_modules/eslint/bin/eslint.js",
     "jest": "./node_modules/jest/bin/jest.js",
     "make-lint": "make lint",
