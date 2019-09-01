@@ -22,7 +22,6 @@
     "lodash.find": "^4.6.0",
     "moment": "^2.22.1",
     "parcel-bundler": "^1.12.2",
-    "pre-commit": "^1.2.2",
     "shelljs": "^0.8.2",
     "sinon": "^7.2.7",
     "trello": "^0.9.0",
@@ -35,7 +34,6 @@
   "license": "MIT",
   "main": "build/index.js",
   "name": "@daniellacosse/accounting-cli",
-  "pre-commit": "make-lint",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/daniellacosse/accounting-cli.git"
@@ -44,7 +42,6 @@
     "account": "node ./build/cli.js",
     "eslint": "./node_modules/eslint/bin/eslint.js",
     "jest": "./node_modules/jest/bin/jest.js",
-    "make-lint": "make lint",
     "parcel": "./node_modules/parcel-bundler/bin/cli.js",
     "typedoc": "./node_modules/typedoc/bin/typedoc"
   },
