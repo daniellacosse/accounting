@@ -41,6 +41,7 @@ commands:
       - save_cache:
           paths:
             - .make
+            - .buildfiles
             - node_modules
           key: v1-dependencies-{{ checksum "yarn.lock" }}
 
