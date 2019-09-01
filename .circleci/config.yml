@@ -7,7 +7,7 @@ executors:
 
 commands:
   set_git_user:
-    description: "setup circle CI as a git user"
+    description: "set up circle CI as a helpful git bot"
     steps:
       - add_ssh_keys
 
@@ -17,12 +17,12 @@ commands:
           git config user.email '<>'
 
   set_production_environment:
-    description: "sets up our needed environment variables"
+    description: "set up our needed environment variables"
     steps:
-      - run: | 
-          echo ENV=circleci > .env
+      - run: |
+          echo NODE_ENV=production > .env
           echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
-  
+
   get_dependencies:
     description: "fetch all necessary dependencies"
     steps:
@@ -34,12 +34,14 @@ commands:
             - v1-dependencies-{{ checksum "yarn.lock" }}
             - v1-dependencies-
 
-      - run: make yarn.lock
-      - run: sudo apt-get install -y jq
+      - run: |
+          git clone git@github.com:daniellacosse/typescript-buildfiles.git .buildfiles
+          make .make/yarn.lock
 
       - save_cache:
           paths:
-            - .cache/deps
+            - .make
+            - .buildfiles
             - node_modules
           key: v1-dependencies-{{ checksum "yarn.lock" }}
 
@@ -51,13 +53,13 @@ jobs:
       - get_dependencies
 
       - run: "make CMD=echo:stub"
-  
+
   lint:
     executor: node
-    
+
     steps:
       - get_dependencies
-      
+
       - run: make lint
 
   test:

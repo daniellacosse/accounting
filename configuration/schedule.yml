@@ -14,7 +14,6 @@ templates:
       - health
     listNames:
       - Monday
-      - Tuesday
       - Wednesday
       - Friday
   - name: exercise - yoga
@@ -22,20 +21,18 @@ templates:
     labelNames:
       - health
     listNames:
-      - Thursday
+      - Tuesday
   - name: morning pills/wakeup
-    startTime: "08:30"
+    startTime: "08:00"
     listNames:
       - Saturday
       - Sunday
-  # - name: start work
-  #   startTime: "9:30"
-  #   listNames:
-  #     - Monday
-  #     - Tuesday
-  #     - Wednesday
-  #     - Thursday
-  #     - Friday
+  - name: exercise - morning
+    startTime: "08:45"
+    labelNames:
+      - health
+    listNames:
+      - Saturday
   - name: weekly accounting
     startTime: "11:00"
     labelNames:
@@ -51,21 +48,21 @@ templates:
       - put away groceries/dishes
       - take out trash
       - pills
-  - name: exercise
-    startTime: "15:00"
+  - name: monthly right
+    startTime: "11:00"
     labelNames:
-      - health
+      - right plan
     listNames:
       - Saturday
-      - Sunday
-  # - name: leave work
-  #   startTime: "18:00"
-  #   listNames:
-  #     - Monday
-  #     - Tuesday
-  #     - Wednesday
-  #     - Thursday
-  #     - Friday
+    checklist:
+      - typing practice
+      - coding practice
+  - name: setup services (if necessary)
+    startTime: "13:00"
+    labelNames:
+      - accounting
+    listNames:
+      - Saturday
   - name: exercise - evening
     startTime: "19:00"
     labelNames:
@@ -74,24 +71,17 @@ templates:
       - Monday
       - Wednesday
       - Friday
-  - name: monthly right
-    startTime: "19:00"
-    labelNames:
-      - right plan
-    listNames:
-      - Tuesday
-    checklist:
-      - typing/coding practice
-      - "monthly project: pick/grind issue"
+      - Saturday
+      - Sunday
   - name: monthly left
     startTime: "19:00"
     labelNames:
       - left plan
     listNames:
-      - Thursday
+      - Tuesday
     checklist:
-      - performance practice/sketching
-      - "monthly creation: planning/executing"
+      - free create - doodle, perf. practice
+      - formal create - make something semi-presentable
   - name: evening pills
     startTime: "22:00"
     listNames:
