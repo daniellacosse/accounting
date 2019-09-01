@@ -18,7 +18,7 @@ default: $(PROXY_FOLDER)
 $(CREDS): $(CRED_TEMPLATE)
 	cp -f $(CRED_TEMPLATE) $(CREDS) $(call IF_ENV,local,&& code $(CREDS))
 
-$(BUILDFILES):
+$(BUILDFILES) $(BUILDFILES)/*:
 	mkdir -p $(BUILDFILES) ;\
 	cd $(BUILDFILES) ;\
 	git pull origin master ;\
