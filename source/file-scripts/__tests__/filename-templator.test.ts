@@ -1,6 +1,6 @@
 import moment from "moment";
 
-import { monthly, weekly } from "../filename-templator";
+import { monthly, weekly, trimesterly } from "../filename-templator";
 
 const testString = "1970-01-15T05:00:00.000Z";
 
@@ -27,4 +27,12 @@ test("respects given date template", () => {
   const testTemplate = "Y-D-M";
 
   expect(weekly(testDate, testTemplate)).toBe(expectedResult);
+});
+
+test("generates valid trimester", () => {
+  const expectedResult = "T1";
+
+  const testDate = moment(testString);
+
+  expect(trimesterly(testDate)).toBe(expectedResult);
 });
