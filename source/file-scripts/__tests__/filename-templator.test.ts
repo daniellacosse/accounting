@@ -29,7 +29,7 @@ test("respects given date template", () => {
   expect(weekly(testDate, testTemplate)).toBe(expectedResult);
 });
 
-const testStringT2 = "1970-04-15T05:00:00.000Z";
+const testStringT2 = "1970-08-15T05:00:00.000Z";
 const testStringT3 = "1970-12-15T05:00:00.000Z";
 
 test("generates valid trimester", () => {
