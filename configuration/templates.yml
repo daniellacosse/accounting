@@ -15,5 +15,5 @@
     - https://www.rescuetime.com/dashboard
 - command: retrospective
   mimetype: pages
-  destination: ~/Documents/Accounting/3\)\ Trimesterly\ Planning\ Audits/2019
+  destination: ~/Documents/Accounting/3\)\ Trimesterly\ Retrospectives/2019
   duration: trimesterly
