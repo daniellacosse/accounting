@@ -42,15 +42,15 @@ export const monthly = (
 export const trimesterly = (monthObject: moment.Moment): string => {
   const month = monthObject.month();
 
-  if (month >= 0 || month <= 3) {
+  if (0 <= month && month <= 3) {
     return "T1";
   }
 
-  if (month >= 4 || month <= 7) {
+  if (4 <= month && month <= 7) {
     return "T2";
   }
 
-  if (month >= 8 || month <= 11) {
+  if (8 <= month && month <= 11) {
     return "T3";
   }
 };

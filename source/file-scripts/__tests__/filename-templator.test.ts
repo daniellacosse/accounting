@@ -32,7 +32,7 @@ test("respects given date template", () => {
 const testStringT2 = "1970-08-15T05:00:00.000Z";
 const testStringT3 = "1970-12-15T05:00:00.000Z";
 
-test("generates valid trimester", () => {
+test("generates valid trimesters", () => {
   const expectedResult = "T1";
   const expectedResultT2 = "T2";
   const expectedResultT3 = "T3";
