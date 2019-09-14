@@ -2,7 +2,7 @@ import moment from "moment";
 import path from "path";
 
 import commandRunner from "./command-runner";
-import { monthly, weekly } from "./filename-templator";
+import { monthly, weekly, trimesterly } from "./filename-templator";
 
 /**
  * Opens up all the resources necessary to complete the Weekly Checkup.
@@ -40,6 +40,12 @@ export function generateTemplateCommands({
           .subtract(1, "month")
       );
       break;
+    case "trimesterly":
+      filename = trimesterly(
+        moment()
+          .startOf("month")
+          .subtract(1, "month")
+      );
   }
 
   const destinationPath = `${destination}/${filename}.${mimetype}`;
