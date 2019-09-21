@@ -1,6 +1,6 @@
 import labelRollup from "../label-rollup";
 
-test("properly counts cards", async () => {
+test.concurrent("properly counts cards", async () => {
   const testLabelOne: TrelloLabel = {
     id: "1",
     name: "label-1"

@@ -2,9 +2,7 @@ import { fake } from "sinon";
 
 import boardReset from "../board-reset";
 
-interface TrelloChecklist {}
-
-test("end-to-end smoke test", async () => {
+test.concurrent("end-to-end smoke test", async () => {
   const mockLabels: TrelloLabel[] = [
     {
       id: "abc",
@@ -17,14 +15,15 @@ test("end-to-end smoke test", async () => {
       due: "",
       dueComplete: true,
       id: "123",
-      labels: [mockLabels[0]]
+      labels: [mockLabels[0]],
+      checklists: []
     },
     {
       due: "",
       dueComplete: true,
       id: "456",
       labels: [],
-      idChecklists: ["890"]
+      checklists: []
     }
   ];
 

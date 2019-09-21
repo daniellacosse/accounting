@@ -4,7 +4,7 @@ import { monthly, weekly, trimesterly } from "../filename-templator";
 
 const testString = "1970-01-15T05:00:00.000Z";
 
-test("generates valid week string", () => {
+test.concurrent("generates valid week string", async () => {
   const expectedResult = "week-of-1-15-to-1-21";
 
   const testDate = moment(testString);
@@ -12,7 +12,7 @@ test("generates valid week string", () => {
   expect(weekly(testDate)).toBe(expectedResult);
 });
 
-test(`generates valid month string`, () => {
+test.concurrent(`generates valid month string`, async () => {
   const expectedResult = "January";
 
   const testDate = moment(testString);
@@ -20,7 +20,7 @@ test(`generates valid month string`, () => {
   expect(monthly(testDate)).toBe(expectedResult);
 });
 
-test("respects given date template", () => {
+test.concurrent("respects given date template", async () => {
   const expectedResult = "week-of-1970-15-1-to-1970-21-1";
 
   const testDate = moment(testString);
@@ -32,7 +32,7 @@ test("respects given date template", () => {
 const testStringT2 = "1970-08-15T05:00:00.000Z";
 const testStringT3 = "1970-12-15T05:00:00.000Z";
 
-test("generates valid trimesters", () => {
+test.concurrent("generates valid trimesters", async () => {
   const expectedResult = "T1";
   const expectedResultT2 = "T2";
   const expectedResultT3 = "T3";

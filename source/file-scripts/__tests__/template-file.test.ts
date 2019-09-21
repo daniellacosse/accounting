@@ -59,19 +59,19 @@ const expectedCommandsWithUrls = [
   `open https://www.example.com`
 ];
 
-test(`generates correct commands to run`, () => {
+test.concurrent(`generates correct commands to run`, async () => {
   const testCommands = generateTemplateCommands(testConfig);
 
   expect(testCommands).toEqual(expectedCommands);
 });
 
-test(`generates monthly commands`, () => {
+test.concurrent(`generates monthly commands`, async () => {
   const testCommands = generateTemplateCommands(monthlyTestConfig);
 
   expect(testCommands).toEqual(expectedMonthlyCommands);
 });
 
-test(`handles additionalUrls`, () => {
+test.concurrent(`handles additionalUrls`, async () => {
   const testCommands = generateTemplateCommands(testConfigWithUrls);
 
   expect(testCommands).toEqual(expectedCommandsWithUrls);
