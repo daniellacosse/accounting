@@ -43,5 +43,5 @@ interface TrelloCard {
    * @type {TrelloChecklist}
    * @memberof TrelloCard
    */
-  idChecklists?: string[];
+  checklists: TrelloChecklist[];
 }
