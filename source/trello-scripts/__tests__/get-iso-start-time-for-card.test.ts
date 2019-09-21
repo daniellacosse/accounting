@@ -2,7 +2,7 @@ import moment from "moment";
 
 import getISOStartTimeForCard from "../get-iso-start-time-for-card";
 
-test(`correctly gets the ISO start time for Sunday`, () => {
+test.concurrent(`correctly gets the ISO start time for Sunday`, async () => {
   const sunday = "Sunday";
 
   const testTemplate: TrelloTemplate = {

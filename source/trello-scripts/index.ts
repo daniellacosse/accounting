@@ -25,8 +25,9 @@ export default async function trelloScriptRunner(
   };
 
   // (1) get the cards from the "This Week" board
-  const thisWeekRawCards: TrelloCard[] = await context.trello.getCardsOnBoard(
-    thisWeekConfig.boardID
+  const thisWeekRawCards: TrelloCard[] = await context.trello.getCardsOnBoardWithExtraParams(
+    thisWeekConfig.boardID,
+    { checklists: "all" }
   );
 
   // (2) only look at the cards from the last 7 days

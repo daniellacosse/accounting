@@ -1,6 +1,6 @@
 import labelRollup from "../label-rollup";
 
-test("properly counts cards", async () => {
+test.concurrent("properly counts cards", async () => {
   const testLabelOne: TrelloLabel = {
     id: "1",
     name: "label-1"
@@ -16,25 +16,45 @@ test("properly counts cards", async () => {
       due: "n/a",
       dueComplete: true,
       id: "123",
-      labels: [testLabelOne, testLabelTwo]
+      labels: [testLabelOne, testLabelTwo],
+      checklists: []
     },
     {
       due: "n/a",
       dueComplete: true,
       id: "456",
-      labels: [testLabelTwo]
+      labels: [testLabelTwo],
+      checklists: [
+        {
+          name: "checklist1",
+          pos: 1,
+          checkItems: [
+            {
+              name: "task1",
+              pos: 1,
+              state: "complete"
+            },
+            {
+              name: "task2",
+              pos: 2,
+              state: "incomplete"
+            }
+          ]
+        }
+      ]
     },
     {
       due: "n/a",
       dueComplete: false,
       id: "789",
-      labels: [testLabelOne]
+      labels: [testLabelOne],
+      checklists: []
     }
   ];
 
   const expectedResult = Promise.resolve({
     "label-1": "1/2",
-    "label-2": "2/2"
+    "label-2": "2/3"
   });
 
   return Promise.all([labelRollup(testCards), expectedResult]).then(

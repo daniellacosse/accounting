@@ -38,8 +38,8 @@ class TrelloRollup {
    * @returns {void} n/a
    * @memberof TrelloRollup
    */
-  public addUncompletedCard(): void {
-    this.total += 1;
+  public addUncompletedItems(amount: number = 1): void {
+    this.total += amount;
   }
 
   /**
@@ -48,9 +48,9 @@ class TrelloRollup {
    * @returns {void} n/a
    * @memberof TrelloRollup
    */
-  public addCompletedCard(): void {
-    this.total += 1;
-    this.completed += 1;
+  public addCompletedItems(amount: number = 1): void {
+    this.total += amount;
+    this.completed += amount;
   }
 
   /**
@@ -78,15 +78,25 @@ export default async function labelRollup(
 ): Promise<{ [label: string]: string }> {
   const rollups: { [labelName: string]: TrelloRollup } = {};
 
-  cards.forEach(({ labels, dueComplete }) => {
+  cards.forEach(({ labels, dueComplete, checklists }) => {
+    const items = checklists.flatMap(({ checkItems }) => checkItems);
+    const completedItemCount = items.filter(({ state }) => state === "complete")
+      .length;
+    const uncompletedItemCount = items.length - completedItemCount;
+
     labels.forEach(({ name }) => {
       if (!rollups[name]) {
         rollups[name] = new TrelloRollup();
       }
 
-      dueComplete
-        ? rollups[name].addCompletedCard()
-        : rollups[name].addUncompletedCard();
+      if (items.length && dueComplete) {
+        rollups[name].addCompletedItems(completedItemCount);
+        rollups[name].addUncompletedItems(uncompletedItemCount);
+      } else {
+        dueComplete
+          ? rollups[name].addCompletedItems()
+          : rollups[name].addUncompletedItems();
+      }
     });
   });
 
