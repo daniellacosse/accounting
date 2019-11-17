@@ -1,62 +1,77 @@
 boardID: 5ae498ab94b06f3fcf3262fa
 templates:
-  - name: morning pills/wakeup
-    startTime: "06:30"
+  - name: morning pills & daily training
+    startTime: "06:00"
+    labelNames:
+      - quota
     listNames:
       - Monday
       - Tuesday
       - Wednesday
       - Thursday
       - Friday
+      - Saturday
+    checklist:
+      - pills
+      - typing
+      - tonguetwister(s)
+      - elevate
+      - instrument (optional)
+  - name: morning pills
+    startTime: "06:00"
+    labelNames:
+      - quota
+    listNames:
+      - Sunday
+    checklist:
+      - pills
+  - name: exercise - yoga
+    startTime: "06:30"
+    labelNames:
+      - health
+    listNames:
+      - Thursday
   - name: exercise - morning
     startTime: "06:45"
     labelNames:
       - health
     listNames:
       - Monday
+      - Tuesday
       - Wednesday
       - Friday
-  - name: exercise - yoga
-    startTime: "06:45"
-    labelNames:
-      - health
-    listNames:
-      - Tuesday
-  - name: morning pills/wakeup
-    startTime: "08:00"
-    listNames:
-      - Saturday
-      - Sunday
   - name: exercise - morning
-    startTime: "08:45"
+    startTime: "09:30"
     labelNames:
       - health
     listNames:
       - Saturday
   - name: weekly accounting
-    startTime: "11:00"
+    startTime: "13:00"
     labelNames:
       - accounting
+      - quota
     listNames:
       - Sunday
     checklist:
-      - weekly checkup
       - emails/contacts
-      - sort files
       - laundry
-      - straighten up/spot clean
-      - put away groceries/dishes
-      - take out trash
       - pills
-  - name: monthly right
+      - put away groceries/dishes
+      - sort files
+      - straighten up/spot clean
+      - take out trash
+      - weekly checkup
+  - name: practice - right
     startTime: "11:00"
     labelNames:
       - right plan
+      - quota
     listNames:
       - Saturday
     checklist:
-      - typing practice
-      - coding practice
+      - leetcode
+      - lesson/lecture
   - name: setup services (if necessary)
     startTime: "13:00"
     labelNames:
@@ -73,17 +88,18 @@ templates:
       - Friday
       - Saturday
       - Sunday
-  - name: monthly left
+  - name: practice - left
     startTime: "19:00"
     labelNames:
       - left plan
+      - quota
     listNames:
-      - Tuesday
+      - Thursday
     checklist:
-      - free create - doodle, perf. practice
-      - formal create - make something semi-presentable
+      - create something small but presentable
+      - skillshare
   - name: evening pills
-    startTime: "22:00"
+    startTime: "21:30"
     listNames:
       - Sunday
       - Monday

@@ -36,7 +36,7 @@ export function generateTemplateCommands({
     case "monthly":
       filename = monthly(
         moment()
-          .startOf("week")
+          .startOf("month")
           .subtract(1, "month")
       );
       break;
