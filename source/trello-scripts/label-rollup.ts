@@ -65,7 +65,7 @@ class TrelloRollup {
 }
 
 /**
- * Counts up the provided cards and returns an object representing the total number of cards
+ * Counts up the provided cards and returns an object representing the total number of cards/checklist items
  * completed against each card label.
  *
  * @export default
@@ -83,6 +83,10 @@ export default async function labelRollup(
     const completedItemCount = items.filter(({ state }) => state === "complete")
       .length;
     const uncompletedItemCount = items.length - completedItemCount;
+
+    if (labels.find(({ name }) => name === "quota")) {
+      return;
+    }
 
     labels.forEach(({ name }) => {
       if (!rollups[name]) {
