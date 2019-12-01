@@ -1,24 +1,24 @@
 boardID: 5ae498ab94b06f3fcf3262fa
 templates:
   - name: morning pills & daily training
-    startTime: "06:00"
+    startTime: "06:45"
     labelNames:
       - quota
     listNames:
       - Monday
       - Tuesday
       - Wednesday
-      - Thursday
       - Friday
       - Saturday
     checklist:
-      - pills
-      - typing
-      - tonguetwister(s)
       - elevate
-      - instrument (optional)
+      - news/article
+      - pills
+      - scrapbook
+      - tonguetwister/instrument
+      - typing
   - name: morning pills
-    startTime: "06:00"
+    startTime: "06:45"
     labelNames:
       - quota
     listNames:
@@ -36,15 +36,16 @@ templates:
     labelNames:
       - health
     listNames:
+      - Thursday
+  - name: exercise - morning
+    startTime: "07:45"
+    labelNames:
+      - health
+    listNames:
       - Monday
       - Tuesday
       - Wednesday
       - Friday
-  - name: exercise - morning
-    startTime: "09:30"
-    labelNames:
-      - health
-    listNames:
       - Saturday
   - name: weekly accounting
     startTime: "13:00"
@@ -61,6 +62,7 @@ templates:
       - sort files
       - straighten up/spot clean
       - take out trash
+      - weekly schedule
       - weekly checkup
   - name: practice - right
     startTime: "11:00"
@@ -78,16 +80,6 @@ templates:
       - accounting
     listNames:
       - Saturday
-  - name: exercise - evening
-    startTime: "19:00"
-    labelNames:
-      - health
-    listNames:
-      - Monday
-      - Wednesday
-      - Friday
-      - Saturday
-      - Sunday
   - name: practice - left
     startTime: "19:00"
     labelNames:
