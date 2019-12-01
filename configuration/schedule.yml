@@ -26,6 +26,12 @@ templates:
     checklist:
       - pills
   - name: exercise - yoga
+    startTime: "06:30"
+    labelNames:
+      - health
+    listNames:
+      - Thursday
+  - name: exercise - morning
     startTime: "06:45"
     labelNames:
       - health
@@ -85,7 +91,7 @@ templates:
       - create something small but presentable
       - skillshare
   - name: evening pills
-    startTime: "22:00"
+    startTime: "21:30"
     listNames:
       - Sunday
       - Monday
