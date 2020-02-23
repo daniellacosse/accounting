@@ -14,7 +14,7 @@ templates:
       - mealpal
       - typing/tonguetwister/instrument
       - scrapbook
-      - mirror talk
+      - scale, mirror talk
   - name: morning affirmation
     startTime: "07:15"
     labelNames:
@@ -25,7 +25,7 @@ templates:
       - pills
       - typing/tonguetwister/instrument
       - scrapbook
-      - mirror talk
+      - scale, mirror talk
   - name: morning pills
     startTime: "07:15"
     labelNames:
@@ -79,7 +79,7 @@ templates:
     listNames:
       - Tuesday
     checklist:
-      - create something small but presentable
+      - some "doodle"
       - lesson/lecture
   - name: practice - right
     startTime: "20:00"

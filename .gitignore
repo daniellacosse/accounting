@@ -1,7 +1,10 @@
 # system
 .env
 .DS_Store
-.make
+.artifacts
+
+# brew
+Brewfile.lock.json
 
 # yarn
 node_modules

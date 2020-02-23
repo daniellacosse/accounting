@@ -1,4 +1,4 @@
-import templates from "configuration/templates.yml";
+import templates from "../../configuration/templates.yml";
 import templateFile from "./template-file";
 
 /**

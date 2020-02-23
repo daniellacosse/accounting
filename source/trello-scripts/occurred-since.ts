@@ -1,4 +1,4 @@
-import constants from "configuration/constants.yml";
+import constants from "../../configuration/constants.yml";
 import moment from "moment";
 
 /**

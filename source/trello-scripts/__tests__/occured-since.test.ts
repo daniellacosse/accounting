@@ -1,6 +1,6 @@
 import moment from "moment";
 
-import constants from "configuration/constants.yml";
+import constants from "../configuration/constants.yml";
 
 import { occurredInTheLastWeek } from "../occurred-since";
 

@@ -1,26 +1,25 @@
 {
   "compilerOptions": {
-    "allowJs": false,
     "allowSyntheticDefaultImports": true,
-    "alwaysStrict": true,
+    "baseUrl": ".",
     "experimentalDecorators": true,
-    "lib": ["esnext", "dom", "scripthost"],
-    "module": "es2015",
     "moduleResolution": "node",
-    "outDir": ".make/dist",
+    "outDir": ".artifacts",
     "removeComments": true,
     "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "preserveSymlinks": true,
     "sourceMap": true,
-    "types": ["node", "jest"]
+    "strict": true,
+    "target": "es6"
   },
   // we exclude these files to save typescript from having to go through them
   "exclude": [
+    ".artifacts",
     ".cache",
     ".circleci",
-    ".make",
     ".github",
     ".vscode",
-    "configuration",
     "documentation",
     "node_modules"
   ],

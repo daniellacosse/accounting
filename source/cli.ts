@@ -1,6 +1,6 @@
 // #!/usr/bin/env node
 import consola from "consola";
-import constants from "configuration/constants.yml";
+import constants from "../configuration/constants.yml";
 import fileScriptRunner from "./file-scripts";
 import trelloScriptRunner from "./trello-scripts";
 

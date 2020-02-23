@@ -1,9 +1,9 @@
 import Trello from "trello";
 import boardReset from "./board-reset";
-import creds from "configuration/credentials.yml";
+import creds from "../../configuration/credentials.yml";
 import labelRollup from "./label-rollup";
 import { occurredInTheLastWeek } from "./occurred-since";
-import thisWeekConfig from "configuration/schedule.yml";
+import thisWeekConfig from "../../configuration/schedule.yml";
 
 /**
  * Takes a supported trello command, runs that function, and returns the result.

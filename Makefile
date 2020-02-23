@@ -1,26 +1,24 @@
-BUILDFILES=.buildfiles
+include .buildfiles/index.mk
 
-include $(BUILDFILES)/main.mk $(BUILDFILES)/commands/*.mk
-
-override PACKAGE_ENTRY_FILENAME=cli
+.buildfiles/index.mk:
+	git submodule add https://github.com/daniellacosse/typescript-buildfiles.git .buildfiles
 
 # -- default --
 
+CONFIG_FOLDER=configuration
 CREDS=$(CONFIG_FOLDER)/credentials.yml
 CRED_TEMPLATE=$(CONFIG_FOLDER)/credentials.example.yml
 
-default: $(PROXY_FOLDER)
+# yarn start
+.PHONY: start
+start: setup build
+	node $(ARTIFACT_FOLDER)/source/cli.js $(CMD)
+
+# yarn build
+.PHONY: build
+build: setup
 	make $(CREDS) ;\
-	make PACKAGE_ENTRY_FILENAME=cli $(PACKAGE_BUILD) ;\
-	yarn account $(CMD)
+	make ENTRY=source/cli.ts RECIPE=parcel
 
 $(CREDS): $(CRED_TEMPLATE)
 	cp -f $(CRED_TEMPLATE) $(CREDS) $(call IF_ENV,,&& code $(CREDS))
-
-$(BUILDFILES):
-	git clone git@github.com:daniellacosse/typescript-buildfiles.git $(BUILDFILES)
-
-# $(BUILDFILES)/main.mk $(BUILDFILES)/commands/*.mk: $(BUILDFILES)
-# 	cd $(BUILDFILES) ;\
-# 	git pull origin master ;\
-# 	cd ..
