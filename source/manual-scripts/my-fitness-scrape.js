@@ -29,7 +29,11 @@ window.windowObject = {
   },
 
   set({ page, total }) {
-    window.name = JSON.stringify({ page, total });
+    window.name = JSON.stringify({
+      page,
+      total,
+      average: this.average({ page, total })
+    });
 
     return window.name;
   },
@@ -46,6 +50,10 @@ window.windowObject = {
     page += 1;
 
     return this.set({ page, total });
+  },
+
+  average({ page, total }) {
+    return total / page;
   }
 };
 

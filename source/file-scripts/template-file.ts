@@ -20,7 +20,7 @@ export function generateTemplateCommands({
 }: FileTemplateConfig): string[] {
   const templatePath = path.resolve(
     __dirname,
-    `../templates/${command}.${mimetype}`
+    `../../templates/${command}.${mimetype}`
   );
 
   let filename;

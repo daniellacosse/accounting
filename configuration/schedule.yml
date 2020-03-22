@@ -6,15 +6,14 @@ templates:
       - quota
     listNames:
       - Monday
-      - Tuesday
       - Wednesday
       - Friday
     checklist:
       - pills
+      - scale, mirror talk
       - mealpal
       - typing/tonguetwister/instrument
       - scrapbook
-      - scale, mirror talk
   - name: morning affirmation
     startTime: "07:15"
     labelNames:
@@ -23,16 +22,16 @@ templates:
       - Saturday
     checklist:
       - pills
+      - scale, mirror talk
       - typing/tonguetwister/instrument
       - scrapbook
-      - scale, mirror talk
   - name: morning pills
     startTime: "07:15"
     labelNames:
       - quota
     listNames:
       - Sunday
-  - name: exercise
+  - name: daily exercise
     startTime: "07:45"
     labelNames:
       - health
@@ -60,17 +59,17 @@ templates:
       - straighten up/spot clean
       - put away groceries/dishes
       - pills
-  - name: evening exercise
-    startTime: "18:30"
-    labelNames:
-      - health
-    listNames:
-      - Monday
-      - Tuesday
-      - Wednesday
-      - Thursday
-      - Friday
-      - Saturday
+  # - name: evening exercise
+  #   startTime: "18:30"
+  #   labelNames:
+  #     - health
+  #   listNames:
+  #     - Monday
+  #     - Tuesday
+  #     - Wednesday
+  #     - Thursday
+  #     - Friday
+  #     - Saturday
   - name: practice - left
     startTime: "20:00"
     labelNames:
@@ -82,15 +81,16 @@ templates:
       - some "doodle"
       - lesson/lecture
   - name: practice - right
-    startTime: "20:00"
+    startTime: "13:00"
     labelNames:
       - right plan
       - quota
     listNames:
-      - Wednesday
+      - Saturday
     checklist:
-      - leetcode
       - lesson/lecture
+      - leetcode
+      - leetcode
   - name: wind down
     startTime: "22:00"
     labelNames:
@@ -105,6 +105,7 @@ templates:
       - Saturday
     checklist:
       - pills
+      - humidifier
       - data collection
       - duolingo & elevate
       - meditate
