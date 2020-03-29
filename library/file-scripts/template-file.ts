@@ -20,32 +20,20 @@ export function generateTemplateCommands({
 }: FileTemplateConfig): string[] {
   const templatePath = path.resolve(
     __dirname,
-    `../../templates/${command}.${mimetype}`
+    `../../../templates/${command}.${mimetype}`
   );
 
   let filename;
 
   switch (duration) {
     case "weekly":
-      filename = weekly(
-        moment()
-          .startOf("day")
-          .subtract(1, "weeks")
-      );
+      filename = weekly(moment().startOf("day").subtract(1, "weeks"));
       break;
     case "monthly":
-      filename = monthly(
-        moment()
-          .startOf("month")
-          .subtract(1, "month")
-      );
+      filename = monthly(moment().startOf("month").subtract(1, "month"));
       break;
     case "trimesterly":
-      filename = trimesterly(
-        moment()
-          .startOf("month")
-          .subtract(1, "month")
-      );
+      filename = trimesterly(moment().startOf("month").subtract(1, "month"));
   }
 
   const destinationPath = `${destination}/${filename}.${mimetype}`;

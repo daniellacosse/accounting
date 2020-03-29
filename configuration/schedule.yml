@@ -4,44 +4,47 @@ templates:
     startTime: "07:15"
     labelNames:
       - quota
+      - health
+      - accounting
     listNames:
       - Monday
       - Wednesday
       - Friday
-    checklist:
-      - pills
-      - scale, mirror talk
-      - mealpal
-      - typing/tonguetwister/instrument
-      - scrapbook
-  - name: morning affirmation
-    startTime: "07:15"
-    labelNames:
-      - quota
-    listNames:
       - Saturday
     checklist:
       - pills
-      - scale, mirror talk
+      # - mealpal
       - typing/tonguetwister/instrument
       - scrapbook
+      - scale, mirror talk
+  # - name: morning affirmation
+  #   startTime: "07:15"
+  #   labelNames:
+  #     - quota
+  #   listNames:
+  #     - Saturday
+  #   checklist:
+  #     - pills
+  #     - scale, mirror talk
+  #     - typing/tonguetwister/instrument
+  #     - scrapbook
   - name: morning pills
     startTime: "07:15"
     labelNames:
       - quota
     listNames:
       - Sunday
-  - name: daily exercise
-    startTime: "07:45"
-    labelNames:
-      - health
-    listNames:
-      - Monday
-      - Tuesday
-      - Wednesday
-      - Thursday
-      - Friday
-      - Saturday
+  # - name: daily exercise
+  #   startTime: "07:45"
+  #   labelNames:
+  #     - health
+  #   listNames:
+  #     - Monday
+  #     - Tuesday
+  #     - Wednesday
+  #     - Thursday
+  #     - Friday
+  #     - Saturday
   - name: weekly accounting
     startTime: "10:30"
     labelNames:
@@ -70,13 +73,32 @@ templates:
   #     - Thursday
   #     - Friday
   #     - Saturday
+  - name: EOW ritual
+    startTime: "18:00"
+    labelNames:
+      - quota
+      - health
+    listNames:
+      # - Sunday
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+      # - Saturday
+    checklist:
+      # - pills
+      # - humidifier
+      - data collection
+      - duolingo & elevate
+      - workout/walk
   - name: practice - left
-    startTime: "20:00"
+    startTime: "19:00"
     labelNames:
       - left plan
       - quota
     listNames:
-      - Tuesday
+      - Thursday
     checklist:
       - some "doodle"
       - lesson/lecture
@@ -106,6 +128,6 @@ templates:
     checklist:
       - pills
       - humidifier
-      - data collection
-      - duolingo & elevate
+      # - data collection
+      # - duolingo & elevate
       - meditate

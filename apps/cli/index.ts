@@ -1,8 +1,8 @@
 // #!/usr/bin/env node
 import consola from "consola";
-import constants from "../configuration/constants.yml";
-import fileScriptRunner from "./file-scripts";
-import trelloScriptRunner from "./trello-scripts";
+import constants from "../../configuration/constants.yml";
+import fileScriptRunner from "../../library/file-scripts";
+import trelloScriptRunner from "../../library/trello-scripts";
 
 /*
   commands are passed to this script in the form of <DOMAIN>:<COMMAND>
@@ -39,7 +39,7 @@ const cliRouter = (domain: Domain, command: string): Promise<Messageable> => {
 };
 
 // READ INPUT AND START //
-(async function(): Promise<void> {
+(async function (): Promise<void> {
   const [DOMAIN, COMMAND] = (
     process.argv[constants.DOMAIN_AND_COMMAND_INDEX] || "echo:nocommand"
   ).split(":");
