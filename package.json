@@ -21,7 +21,9 @@
   },
   "scripts": {
     "start": "make start",
-    "build": "make build"
+    "build": "make build",
+    "checkup": "yarn start CMD='file:checkup'",
+    "reset": "yarn start CMD='trello:reset'"
   },
   "version": "0.0.20",
   "devDependencies": {
@@ -40,6 +42,7 @@
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "jest": "^25.1.0",
+    "node-gyp": "^6.1.0",
     "parcel-bundler": "^1.12.4",
     "prettier": "^2.0.2",
     "sinon": "^9.0.0",

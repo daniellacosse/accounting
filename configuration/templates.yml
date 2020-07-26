@@ -1,19 +1,17 @@
 - command: checkup
   mimetype: numbers
-  destination: ~/Documents/Accounting/1\)\ Weekly\ Checkups/2020
+  destination: ~/Documents/Personal/Accounting/1\)\ Weekly\ Checkups/2020
   duration: weekly
   additionalUrls:
-    - https://www.myfitnesspal.com/food/diary
     - https://home.personalcapital.com/page/login/app
-    - https://www.rescuetime.com/dashboard
 - command: recounting
   mimetype: numbers
   duration: monthly
-  destination: ~/Documents/Accounting/2\)\ Monthly\ Recounting/2020
+  destination: ~/Documents/Personal/Accounting/2\)\ Monthly\ Recounting/2020
   additionalUrls:
     - https://home.personalcapital.com/page/login/app
     - https://www.rescuetime.com/dashboard
 - command: retrospective
   mimetype: pages
-  destination: ~/Documents/Accounting/3\)\ Trimesterly\ Retrospectives/2020
+  destination: ~/Documents/Personal/Accounting/3\)\ Trimesterly\ Retrospectives/2020
   duration: trimesterly

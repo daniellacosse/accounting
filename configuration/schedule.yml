@@ -1,50 +1,24 @@
 boardID: 5ae498ab94b06f3fcf3262fa
 templates:
-  - name: morning affirmation
-    startTime: "07:15"
+  - name: mental warm-up
+    startTime: "07:00"
     labelNames:
       - quota
       - health
-      - accounting
     listNames:
       - Monday
+      - Tuesday
       - Wednesday
+      - Thursday
       - Friday
       - Saturday
-    checklist:
-      - pills
-      # - mealpal
-      - typing/tonguetwister/instrument
-      - scrapbook
-      - scale, mirror talk
-  # - name: morning affirmation
-  #   startTime: "07:15"
-  #   labelNames:
-  #     - quota
-  #   listNames:
-  #     - Saturday
-  #   checklist:
-  #     - pills
-  #     - scale, mirror talk
-  #     - typing/tonguetwister/instrument
-  #     - scrapbook
-  - name: morning pills
-    startTime: "07:15"
-    labelNames:
-      - quota
-    listNames:
       - Sunday
-  # - name: daily exercise
-  #   startTime: "07:45"
-  #   labelNames:
-  #     - health
-  #   listNames:
-  #     - Monday
-  #     - Tuesday
-  #     - Wednesday
-  #     - Thursday
-  #     - Friday
-  #     - Saturday
+    checklist:
+      - duolingo
+      - elevate
+      - scale
+      - "lesson: blender/rust/gamedev/masterclass/algorithms"
+      - "additional practice: typing/instrument/'doodle'/leetcode/tonguetwister"
   - name: weekly accounting
     startTime: "10:30"
     labelNames:
@@ -56,66 +30,16 @@ templates:
       - weekly checkup
       - weekly schedule
       - sort files
-      - emails/contacts
+      - missed contacts
       - laundry
       - take out trash
-      - straighten up/spot clean
-      - put away groceries/dishes
+      - straighten up & spot clean
+      - put away groceries & dishes
       - pills
-  # - name: evening exercise
-  #   startTime: "18:30"
-  #   labelNames:
-  #     - health
-  #   listNames:
-  #     - Monday
-  #     - Tuesday
-  #     - Wednesday
-  #     - Thursday
-  #     - Friday
-  #     - Saturday
-  - name: EOW ritual
-    startTime: "18:00"
+  - name: p90x
+    startTime: "18:30"
     labelNames:
-      - quota
       - health
-    listNames:
-      # - Sunday
-      - Monday
-      - Tuesday
-      - Wednesday
-      - Thursday
-      - Friday
-      # - Saturday
-    checklist:
-      # - pills
-      # - humidifier
-      - data collection
-      - duolingo & elevate
-      - workout/walk
-  - name: practice - left
-    startTime: "19:00"
-    labelNames:
-      - left plan
-      - quota
-    listNames:
-      - Thursday
-    checklist:
-      - some "doodle"
-      - lesson/lecture
-  - name: practice - right
-    startTime: "13:00"
-    labelNames:
-      - right plan
-      - quota
-    listNames:
-      - Saturday
-    checklist:
-      - lesson/lecture
-      - leetcode
-      - leetcode
-  - name: wind down
-    startTime: "22:00"
-    labelNames:
       - quota
     listNames:
       - Sunday
@@ -125,9 +49,3 @@ templates:
       - Thursday
       - Friday
       - Saturday
-    checklist:
-      - pills
-      - humidifier
-      # - data collection
-      # - duolingo & elevate
-      - meditate
